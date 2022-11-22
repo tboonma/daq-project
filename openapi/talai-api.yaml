@@ -93,14 +93,14 @@ paths:
           type: integer
     get:
       summary: Returns all bus stops for given route
-      operationId: controller.get_route
+      operationId: controller.get_bus_route
       responses:
         200:
           description: Success
-  /bus:
+  /buses:
     get:
       summary: Returns all KU Talai bus number
-      operationId: controller.get_bus
+      operationId: controller.get_buses
       responses:
         200:
           description: Success
