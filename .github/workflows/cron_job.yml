@@ -1,0 +1,9 @@
+name: Insert data to database
+
+on:
+  schedule:
+    # Runs "every 1 hour" (see https://crontab.guru)
+    - cron: '0 * * * *'
+
+jobs:
+  
