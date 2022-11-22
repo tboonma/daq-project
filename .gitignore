@@ -12,3 +12,4 @@ stub/
 *-sol.*
 ve
 venv/
+node_modules/
