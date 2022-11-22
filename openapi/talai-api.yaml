@@ -53,6 +53,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/BusstopWeather'
+  /routes:
+    get:
+      summary: Returns a list of routes of KU Talai bus
+      operationId: controller.get_routes
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Route'
+  /bus/{stopIdOrigin}/{stopIdDest}:
+    parameters:
+      - name: stopIdOrigin
+        in: path
+        required: true
+        schema:
+          type: integer
+      - name: stopIdDest
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Returns list of takable bus from origin to destination
+      operationId: controller.get_takable_bus
+      responses:
+        200:
+          description: Success
+  /route/{busId}:
+    parameters:
+      - name: busId
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Returns all bus stops for given route
+      operationId: controller.get_route
+      responses:
+        200:
+          description: Success
+  /bus:
+    get:
+      summary: Returns all KU Talai bus number
+      operationId: controller.get_bus
+      responses:
+        200:
+          description: Success
 
 components:
   schemas:
@@ -67,12 +118,25 @@ components:
           type: number
         lon:
           type: number
-    BusRoute:
+    Route:
       type: object
       properties:
-        routeId:
+        id:
           type: integer
-        busId:
+        routeNumber:
+          type: integer
+        name:
+          type: string
+    Bus:
+      type: object
+      properties:
+        id:
+          type: object
+        bus_number:
+          type: integer
+        bus_stop_id:
+          type: integer
+        route_id:
           type: integer
     BusstopWeather:
       type: object
