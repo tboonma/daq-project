@@ -17,6 +17,12 @@ jobs:
       - uses: actions/checkout@v3
       - name: Install Deta CLI
         run: curl -fsSL https://get.deta.dev/cli.sh | sh
+      - name: Prepare Dependencies file
+        run: |
+          cd ${{ env.ASSIGNMENT1_NAME }}/src
+          tail -n +2 "requirements.txt" >> new_requirements.txt
+          tail stub/requirements.txt >> new_requirements.txt
+          mv new_requirements.txt requirements.txt
       - name: Clone Micro Metadata
         shell: bash
         run: |
