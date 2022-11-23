@@ -22,6 +22,7 @@ jobs:
         run: |
           npm i
           npm run gen-server
+          rm -rf node_modules
       - name: Install Deta CLI
         run: curl -fsSL https://get.deta.dev/cli.sh | sh
       - name: Prepare Dependencies file
