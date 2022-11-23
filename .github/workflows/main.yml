@@ -35,6 +35,14 @@ jobs:
           export DETA_ACCESS_TOKEN=${{ secrets.DETA_ACCESS_TOKEN }}
           ~/.deta/bin/deta clone --name ${{ env.PROJECT_NAME }} --project ${{ env.DETA_PROJECT }} tmp/
           cp -r tmp/.deta .
+      - name: Create .env
+        shell: bash
+        run: |
+          echo DB_HOST={{ secrets.DB_HOST }} >> .env
+          echo DB_NAME={{ secrets.DB_NAME }} >> .env
+          echo DB_PASSWD={{ secrets.DB_PASSWD }} >> .env
+          echo DB_USER={{ secrets.DB_USER }} >> .env
+          echo AQICN_TOKEN={{ secrets.AQICN_TOKEN }} >> .env
       - name: Deploy to Deta
         run: |
           export DETA_ACCESS_TOKEN=${{ secrets.DETA_ACCESS_TOKEN }}
