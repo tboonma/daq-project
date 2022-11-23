@@ -1,0 +1,32 @@
+name: Project Deployment Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DETA_PROJECT: daq-assignment
+  PROJECT_NAME: KU-Travel
+
+jobs:
+  deploy1:
+    name: Deploy project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Deta CLI
+        run: curl -fsSL https://get.deta.dev/cli.sh | sh
+      - name: Clone Micro Metadata
+        shell: bash
+        run: |
+          export DETA_ACCESS_TOKEN=${{ secrets.DETA_ACCESS_TOKEN }}
+          cd ${{ env.PROJECT_NAME }}/src
+          ~/.deta/bin/deta clone --name ${{ env.PROJECT_NAME }} --project ${{ env.DETA_PROJECT }} tmp/
+          cp -r tmp/.deta .
+      - name: Deploy to Deta
+        run: |
+          export DETA_ACCESS_TOKEN=${{ secrets.DETA_ACCESS_TOKEN }}
+          cd ${{ env.PROJECT_NAME }}/src
+          ~/.deta/bin/deta deploy
+          ~/.deta/bin/deta visor enable

@@ -13,3 +13,4 @@ ve
 venv/
 node_modules/
 .env
+.deta/
