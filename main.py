@@ -23,7 +23,7 @@ except ModuleNotFoundError:
           " pip install -r requirements.txt")
     sys.exit(1)
 
-from swagger_server import encoder
+from openapi_server import encoder
 
 app = connexion.App(__name__, specification_dir='./openapi/')
 app.app.json_encoder = encoder.JSONEncoder
