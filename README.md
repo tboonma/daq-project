@@ -13,21 +13,30 @@ This project is part of Data Acquisition and Integration 2022. You can find the 
 | Name   | Version |
 | ------ | ------- |
 | npm    | any     |
-| node   | 16.13.2 |
 | Python | 3.9     |
 
 ### Installation
 
 1. Clone the repository and use Python virtual environment.
 2. Create an `.env` file from [example.env](example.env)
-3. Install all dependencies
+3. Generate new server stub
+```
+npm run gen-server
+```
+4. Install all dependencies
 
 ```
 pip install -r requirements.txt
+npm i
 ```
 
-4. Run project locally
+5. Run project locally
 
 ```
 python app.py
 ```
+
+### Add an endpoint
+1. Write endpoint info on [talai-api.yaml](openapi/talai-api.yaml)
+2. Generate new server stub
+3. Create function in [controller.py](controller.py) based on swagger operation id.
