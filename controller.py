@@ -49,3 +49,9 @@ def get_bus_route(bus_id):
 
 def get_buses():
     return "Doing something"
+
+def put_population():
+    return "Doing something"
+
+def get_population():
+    return "Doing something"

@@ -104,6 +104,25 @@ paths:
       responses:
         200:
           description: Success
+  /population/{stopId}:
+    parameters:
+      - name: stopId
+        in: path
+        required: true
+        schema:
+          type: integer
+    put:
+      summary: Increment people in KU Talai bus stop
+      operationId: controller.put_population
+      responses:
+        200:
+          description: Success
+    get:
+      summary: Get population density in each KU Talai bus
+      operationId: controller.get_population
+      responses:
+        200:
+          description: Success
 
 components:
   schemas:
