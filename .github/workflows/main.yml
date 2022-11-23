@@ -19,7 +19,6 @@ jobs:
         run: curl -fsSL https://get.deta.dev/cli.sh | sh
       - name: Prepare Dependencies file
         run: |
-          cd ${{ env.ASSIGNMENT1_NAME }}/src
           tail -n +2 "requirements.txt" >> new_requirements.txt
           tail stub/requirements.txt >> new_requirements.txt
           mv new_requirements.txt requirements.txt
@@ -27,12 +26,10 @@ jobs:
         shell: bash
         run: |
           export DETA_ACCESS_TOKEN=${{ secrets.DETA_ACCESS_TOKEN }}
-          cd ${{ env.PROJECT_NAME }}/src
           ~/.deta/bin/deta clone --name ${{ env.PROJECT_NAME }} --project ${{ env.DETA_PROJECT }} tmp/
           cp -r tmp/.deta .
       - name: Deploy to Deta
         run: |
           export DETA_ACCESS_TOKEN=${{ secrets.DETA_ACCESS_TOKEN }}
-          cd ${{ env.PROJECT_NAME }}/src
           ~/.deta/bin/deta deploy
           ~/.deta/bin/deta visor enable
