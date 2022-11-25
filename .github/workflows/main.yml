@@ -25,11 +25,6 @@ jobs:
           rm -rf node_modules
       - name: Install Deta CLI
         run: curl -fsSL https://get.deta.dev/cli.sh | sh
-      - name: Prepare Dependencies file
-        run: |
-          tail -n +2 "requirements.txt" >> new_requirements.txt
-          tail stub/requirements.txt >> new_requirements.txt
-          mv new_requirements.txt requirements.txt
       - name: Clone Micro Metadata
         shell: bash
         run: |
