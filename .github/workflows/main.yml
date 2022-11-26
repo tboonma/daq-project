@@ -84,3 +84,8 @@ jobs:
           echo AQICN_TOKEN=${{ secrets.AQICN_TOKEN }} >> .env
           export DETA_ACCESS_TOKEN=${{ secrets.DETA_ACCESS_TOKEN }}
           ~/.deta/bin/deta update -e .env
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: project_deployment
+          path: .
