@@ -27,7 +27,7 @@ except ModuleNotFoundError:
 from openapi_server import encoder
 
 app = connexion.App(__name__, specification_dir='./openapi/')
-CORS(app.app, resource={r"/api/*": {"origins": "*"}})
+CORS(app.app, resources={r"/api/*": {"origins": "*"}})
 app.app.json_encoder = encoder.JSONEncoder
 app.add_api('talai-api.yaml',
             arguments={'title': 'KU Talai API'},
