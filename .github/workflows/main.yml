@@ -36,17 +36,16 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: Go to clientside directory
-        run: cd clientside
       - name: Build clientside package
         run: |
+          cd clientside
           npm ci
           npm run build
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: clientside_package
-          path: build
+          path: clientside/build
   deploy:
     name: Deploy project
     runs-on: ubuntu-latest
