@@ -3,6 +3,7 @@ from flask import abort
 import pymysql
 from dbutils.pooled_db import PooledDB
 from config import OPENAPI_STUB_DIR, DB_HOST, DB_USER, DB_PASSWD, DB_NAME
+import logging
 
 sys.path.append(OPENAPI_STUB_DIR)
 from openapi_server import models
@@ -16,11 +17,14 @@ pool = PooledDB(creator=pymysql,
                 blocking=True)
 
 def get_busstops():
+    logging.info("Connecting to database...")
     with pool.connection() as conn, conn.cursor() as cs:
+        logging.info("Executing query...")
         cs.execute("""
             SELECT bus_stop_id, bus_stop_name, lat, lon
             FROM bus_stop
         """)
+        logging.info("Returning result...")
         result = [models.Busstop(*row) for row in cs.fetchall()]
         return result
 
