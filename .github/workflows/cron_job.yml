@@ -51,4 +51,14 @@ jobs:
           path: .
       - name: Fetch and save data to MySQL
         run: python cron_tasks.py pm25_aqicn
+  iqair:
+    name: fetch IQAir data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: project_package
+          path: .
+      - name: Fetch and save data to MySQL
+        run: python cron_tasks.py pmiqair
   

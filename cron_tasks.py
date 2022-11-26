@@ -5,6 +5,7 @@ from config import DB_HOST, DB_USER, DB_PASSWD, DB_NAME
 import requests
 import os
 import sys
+from time import sleep
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -54,6 +55,33 @@ def pm25_aqicn():
                 conn.commit()
             print(f"[AQICN] {result.name} weather data inserted...")
 
+def iqair():
+    print("[IQAir] Getting all busstop...")
+    results = get_busstops()
+    if results:
+        for result in results:
+            print(f"[IQAir] Getting weather data for {result.name}...")
+            response = requests.get(f"http://api.airvisual.com/v2/nearest_city?lat={result.lat}&lon={result.lon}&key={os.getenv('IQAIR_TOKEN')}")
+            data = response.json()
+            print(f"[IQAir] Inserting weather data for {result.name}...")
+            with pool.connection() as conn, conn.cursor() as cs:
+                cs.execute("""
+                    INSERT INTO iqair (bus_stop_id, temperature, humidity, wind_speed, pm25_value)
+                    VALUES (
+                        %s, %s, %s, %s, %s
+                    )
+                """, [
+                    result.busstop_id,
+                    data['data']['current']['weather']['tp'],
+                    data['data']['current']['weather']['hu'],
+                    data['data']['current']['weather']['ws'],
+                    data['data']['current']['pollution']['aqius']
+                ])
+                conn.commit()
+            print(f"[IQAir] {result.name} weather data inserted...")
+            sleep(20)
+
+
 if __name__ == '__main__':
     if sys.argv[1] != None:
         globals()[sys.argv[1]]()
@@ -66,3 +94,7 @@ if __name__ == '__main__':
             pm25_aqicn()
         except:
             print("Retireve data from AQICN error...")
+        try:
+            iqair()
+        except:
+            print("Retireve data from IQAir error...")
