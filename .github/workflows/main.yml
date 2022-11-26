@@ -10,8 +10,8 @@ env:
   PROJECT_NAME: KU-Travel
 
 jobs:
-  deploy1:
-    name: Deploy project
+  build_serverside:
+    name: Build Serverside
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -20,9 +20,45 @@ jobs:
           node-version: 16
       - name: Generate server stub
         run: |
-          npm i
+          npm ci
           npm run gen-server
           rm -rf node_modules
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build_serverside_artifacts
+          path: .
+  build_clientside:
+    name: Build Clientside
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download serverside artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: build_serverside_artifacts
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Go to clientside directory
+        run: cd clientside
+      - name: Build clientside package
+        run: |
+          npm ci
+          npm run build
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: completed_artifacts
+          path: .
+  deploy:
+    name: Deploy project
+    runs-on: ubuntu-latest
+    needs: [build_serverside, build_clientside]
+    steps:
+      - name: Download completed artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: completed_artifacts
       - name: Install Deta CLI
         run: curl -fsSL https://get.deta.dev/cli.sh | sh
       - name: Clone Micro Metadata
