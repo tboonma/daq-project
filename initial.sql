@@ -1,14 +1,13 @@
 -- create bus stop table
-CREATE TABLE IF NOT EXISTS N bus_stop (
+CREATE TABLE IF NOT EXISTS bus_stop (
   bus_stop_id INT PRIMARY KEY AUTO_INCREMENT,
   bus_stop_name varchar(100) NOT NULL,
   lat float NOT NULL,
   lon float NOT NULL
-  population INT DEFAULT 0
 );
 
 -- create route table
-CREATE TABLE IF NOT EXISTS route (
+CREATE TABLE IF NOT EXISTS `route` (
     id INT PRIMARY KEY AUTO_INCREMENT,
     route_number INT NOT NULL,
     name varchar(200) NOT NULL

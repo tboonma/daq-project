@@ -1,6 +1,5 @@
 import sys
 import os
-from flask_cors import CORS
 
 if not os.path.exists("config.py"):
     print("Configuration 'config.py' not found.  "
@@ -20,6 +19,7 @@ sys.path.append(OPENAPI_STUB_DIR)
 try:
     import connexion
     from flask import render_template
+    from flask_cors import CORS
 except ModuleNotFoundError:
     print("Please install all required packages by running:"
           " pip install -r requirements.txt")

@@ -16,6 +16,7 @@ pool = PooledDB(creator=pymysql,
                 maxconnections=1,
                 blocking=True)
 
+
 def get_busstops():
     logging.info("Connecting to database...")
     with pool.connection() as conn, conn.cursor() as cs:

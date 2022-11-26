@@ -34,6 +34,7 @@ jobs:
   open-meteo:
     name: fetch Open Meteo data
     runs-on: ubuntu-latest
+    needs: [build]
     steps:
       - uses: actions/download-artifact@v3
         with:
@@ -44,6 +45,7 @@ jobs:
   aqicn:
     name: fetch Aqicn data
     runs-on: ubuntu-latest
+    needs: [build]
     steps:
       - uses: actions/download-artifact@v3
         with:
@@ -54,6 +56,7 @@ jobs:
   iqair:
     name: fetch IQAir data
     runs-on: ubuntu-latest
+    needs: [build]
     steps:
       - uses: actions/download-artifact@v3
         with:
