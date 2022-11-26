@@ -1,4 +1,4 @@
-from main import app
+from main import flask_app
 
 if __name__ == '__main__':
-    app.run(port=8080, debug=True)
+    flask_app.run(port=8080, debug=True)

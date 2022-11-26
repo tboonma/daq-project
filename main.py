@@ -19,6 +19,7 @@ sys.path.append(OPENAPI_STUB_DIR)
 
 try:
     import connexion
+    from flask import render_template
 except ModuleNotFoundError:
     print("Please install all required packages by running:"
           " pip install -r requirements.txt")
@@ -26,9 +27,18 @@ except ModuleNotFoundError:
 
 from openapi_server import encoder
 
-app = connexion.App(__name__, specification_dir='./openapi/')
-CORS(app.app, resources={r"/api/*": {"origins": "*"}})
-app.app.json_encoder = encoder.JSONEncoder
-app.add_api('talai-api.yaml',
+app = connexion.FlaskApp(__name__, specification_dir='./', server_args={'static_folder': './clientside/build/static', 'template_folder': './clientside/build'})
+flask_app = app.app
+CORS(flask_app, resources={r"/*": {"origins": "*"}})
+flask_app.json_encoder = encoder.JSONEncoder
+app.add_api('openapi/talai-api.yaml',
             arguments={'title': 'KU Talai API'},
             pythonic_params=True)
+
+@flask_app.route('/', defaults={'path': ''})
+@flask_app.route('/<path:path>')
+def serve(path):
+    if path != "" and os.path.exists(flask_app.static_folder + '/' + path):
+        return render_template(flask_app.static_folder + '/' + path)
+    else:
+        return render_template('index.html')
