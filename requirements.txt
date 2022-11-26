@@ -7,3 +7,4 @@ DBUtils
 PyMySQL
 requests
 python-dotenv
+Flask-Cors
