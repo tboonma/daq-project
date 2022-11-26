@@ -6,8 +6,8 @@ on:
     - cron: '0 * * * *'
 
 jobs:
-  fetch-data:
-    name: fetch data to database
+  build:
+    name: Build project for inserting data
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,5 +26,29 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: project_package
+          path: .
+  open-meteo:
+    name: fetch Open Meteo data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: project_package
+          path: .
       - name: Fetch and save data to MySQL
-        run: python cron_tasks.py
+        run: python cron_tasks.py weather_open_meteo
+  aqicn:
+    name: fetch Aqicn data
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: project_package
+          path: .
+      - name: Fetch and save data to MySQL
+        run: python cron_tasks.py pm25_aqicn
+  
