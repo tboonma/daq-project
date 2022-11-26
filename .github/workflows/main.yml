@@ -55,11 +55,11 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: serverside_package
-          path: .
+          path: stub
       - uses: actions/download-artifact@v3
         with:
           name: clientside_package
-          path: clientside
+          path: clientside/build
       - name: Install Deta CLI
         run: curl -fsSL https://get.deta.dev/cli.sh | sh
       - name: Clone Micro Metadata
