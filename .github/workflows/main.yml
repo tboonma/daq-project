@@ -46,4 +46,4 @@ jobs:
           echo DB_USER={{ secrets.DB_USER }} >> .env
           echo AQICN_TOKEN={{ secrets.AQICN_TOKEN }} >> .env
           export DETA_ACCESS_TOKEN=${{ secrets.DETA_ACCESS_TOKEN }}
-          ~/.deta/bin/deta deploy
+          ~/.deta/bin/deta update -e .env
