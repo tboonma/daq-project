@@ -1,6 +1,6 @@
 import sys
 import os
-from flask_cors import CORS
+
 
 if not os.path.exists("config.py"):
     print("Configuration 'config.py' not found.  "
@@ -29,7 +29,6 @@ from openapi_server import encoder
 
 app = connexion.FlaskApp(__name__, specification_dir='./', server_args={'static_folder': './clientside/build/static', 'template_folder': './clientside/build'})
 flask_app = app.app
-CORS(flask_app, resources={r"/*": {"origins": "*"}})
 flask_app.json_encoder = encoder.JSONEncoder
 app.add_api('openapi/talai-api.yaml',
             arguments={'title': 'KU Talai API'},
