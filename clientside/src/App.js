@@ -7,12 +7,14 @@ import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import React, { useState, useEffect } from 'react'
 import DefaultApi from './generated/src/api/DefaultApi'
+import ApiClient from './generated/src/ApiClient'
 
 function App() {
   const [origin, setOrigin] = useState('')
   const [destination, setDestination] = useState('')
   const [busstops, setBusstops] = useState([])
-  const api = new DefaultApi()
+  const apiClient = new ApiClient("/talai-api/v1")
+  const api = new DefaultApi(apiClient)
 
   useEffect(() => {
     api.controllerGetBusstops((err, data, res) => {
