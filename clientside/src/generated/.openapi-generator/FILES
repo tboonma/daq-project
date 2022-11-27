@@ -1,6 +1,5 @@
 .babelrc
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 docs/Bus.md
@@ -18,8 +17,3 @@ src/model/Bus.js
 src/model/Busstop.js
 src/model/BusstopWeather.js
 src/model/Route.js
-test/api/DefaultApi.spec.js
-test/model/Bus.spec.js
-test/model/Busstop.spec.js
-test/model/BusstopWeather.spec.js
-test/model/Route.spec.js

@@ -27,7 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "gen-client": "openapi-generator-cli generate -i ../openapi/talai-api.yaml -g javascript -o src/generated --additional-properties=disallowAdditionalPropertiesIfNotPresent=false,supportsES6=true --enable-post-process-file"
+    "gen-client": "openapi-generator-cli generate -i ../openapi/talai-api.yaml -g javascript -o src/generated --additional-properties=disallowAdditionalPropertiesIfNotPresent=false,supportsES6=true --enable-post-process-file && eslint --fix src/generated/**/*.js"
   },
   "eslintConfig": {
     "extends": [
@@ -49,6 +49,9 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
+    "eslint-plugin-eqeqeq-fix": "^1.0.3",
+    "i": "^0.3.7",
+    "npm": "^9.1.2",
     "postcss": "^8.4.19",
     "tailwindcss": "^3.2.4"
   }
