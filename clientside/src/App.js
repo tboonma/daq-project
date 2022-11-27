@@ -5,7 +5,7 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import DefaultApi from './generated/src/api/DefaultApi'
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
         integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-        crossorigin=""
+        crossOrigin=""
       />
       <Navbar />
       <div className="pt-10 md:pt-20 md:px-14 md:flex md:space-x-3">
