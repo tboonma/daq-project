@@ -1,11 +1,10 @@
-import logo from './logo.svg'
 import './App.css'
-import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
 import Navbar from './components/Navbar'
 import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
-import Select, { SelectChangeEvent } from '@mui/material/Select'
+import Select from '@mui/material/Select'
 import { useState, useEffect } from 'react'
 import DefaultApi from './generated/src/api/DefaultApi'
 
@@ -19,7 +18,7 @@ function App() {
     api.controllerGetBusstops((err, data, res) => {
       setBusstops(data)
     })
-  }, [])
+  })
 
   return (
     <div className="">
