@@ -44,7 +44,7 @@ function App() {
             <Marker
               position={[
                 destination.lat ?? 13.848584,
-                destination.lon ?? 100.571825,
+                destination.lon ?? 100.571825
               ]}
             >
               <Popup>{destination.name ?? 'Please select destination'}</Popup>
