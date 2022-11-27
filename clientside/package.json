@@ -27,7 +27,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "gen-client": "openapi-generator-cli generate -i ../openapi/talai-api.yaml -g javascript -o src/generated --additional-properties=disallowAdditionalPropertiesIfNotPresent=false,supportsES6=true --enable-post-process-file"
+    "format": "prettier-eslint --write \"{,!(node_modules)/**/}*.{js,jsx}\"",
+    "gen-client": "openapi-generator-cli generate -i ../openapi/talai-api.yaml -g javascript -o src/generated --additional-properties=disallowAdditionalPropertiesIfNotPresent=false,supportsES6=true --enable-post-process-file && prettier-eslint --write \"src/generated/*.{js,jsx}\""
   },
   "eslintConfig": {
     "extends": [
@@ -49,7 +50,17 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.13",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.11",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "postcss": "^8.4.19",
+    "prettier": "^2.8.0",
+    "prettier-eslint-cli": "^7.1.0",
     "tailwindcss": "^3.2.4"
   }
 }
