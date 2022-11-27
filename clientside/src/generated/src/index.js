@@ -11,12 +11,12 @@
  *
  */
 
-import ApiClient from "./ApiClient";
-import Bus from "./model/Bus";
-import Busstop from "./model/Busstop";
-import BusstopWeather from "./model/BusstopWeather";
-import Route from "./model/Route";
-import DefaultApi from "./api/DefaultApi";
+import ApiClient from './ApiClient'
+import Bus from './model/Bus'
+import Busstop from './model/Busstop'
+import BusstopWeather from './model/BusstopWeather'
+import Route from './model/Route'
+import DefaultApi from './api/DefaultApi'
 
 /**
  * To be added.<br>
@@ -85,4 +85,4 @@ export {
    * @property {module:api/DefaultApi}
    */
   DefaultApi,
-};
+}

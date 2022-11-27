@@ -11,7 +11,7 @@
  *
  */
 
-import ApiClient from "../ApiClient";
+import ApiClient from '../ApiClient'
 
 /**
  * The Bus model module.
@@ -24,7 +24,7 @@ class Bus {
    * @alias module:model/Bus
    */
   constructor() {
-    Bus.initialize(this);
+    Bus.initialize(this)
   }
 
   /**
@@ -43,28 +43,28 @@ class Bus {
    */
   static constructFromObject(data, obj) {
     if (data) {
-      obj = obj || new Bus();
+      obj = obj || new Bus()
 
-      if (data.hasOwnProperty("id")) {
-        obj["id"] = ApiClient.convertToType(data["id"], Object);
+      if (data.hasOwnProperty('id')) {
+        obj['id'] = ApiClient.convertToType(data['id'], Object)
       }
-      if (data.hasOwnProperty("bus_number")) {
-        obj["bus_number"] = ApiClient.convertToType(
-          data["bus_number"],
-          "Number"
-        );
+      if (data.hasOwnProperty('bus_number')) {
+        obj['bus_number'] = ApiClient.convertToType(
+          data['bus_number'],
+          'Number'
+        )
       }
-      if (data.hasOwnProperty("bus_stop_id")) {
-        obj["bus_stop_id"] = ApiClient.convertToType(
-          data["bus_stop_id"],
-          "Number"
-        );
+      if (data.hasOwnProperty('bus_stop_id')) {
+        obj['bus_stop_id'] = ApiClient.convertToType(
+          data['bus_stop_id'],
+          'Number'
+        )
       }
-      if (data.hasOwnProperty("route_id")) {
-        obj["route_id"] = ApiClient.convertToType(data["route_id"], "Number");
+      if (data.hasOwnProperty('route_id')) {
+        obj['route_id'] = ApiClient.convertToType(data['route_id'], 'Number')
       }
     }
-    return obj;
+    return obj
   }
 
   /**
@@ -73,28 +73,28 @@ class Bus {
    * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Bus</code>.
    */
   static validateJSON(data) {
-    return true;
+    return true
   }
 }
 
 /**
  * @member {Object} id
  */
-Bus.prototype["id"] = undefined;
+Bus.prototype['id'] = undefined
 
 /**
  * @member {Number} bus_number
  */
-Bus.prototype["bus_number"] = undefined;
+Bus.prototype['bus_number'] = undefined
 
 /**
  * @member {Number} bus_stop_id
  */
-Bus.prototype["bus_stop_id"] = undefined;
+Bus.prototype['bus_stop_id'] = undefined
 
 /**
  * @member {Number} route_id
  */
-Bus.prototype["route_id"] = undefined;
+Bus.prototype['route_id'] = undefined
 
-export default Bus;
+export default Bus

@@ -11,61 +11,61 @@
  *
  */
 
-(function (root, factory) {
-  if (typeof define === "function" && define.amd) {
+;(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
     // AMD.
-    define(["expect.js", process.cwd() + "/src/index"], factory);
-  } else if (typeof module === "object" && module.exports) {
+    define(['expect.js', process.cwd() + '/src/index'], factory)
+  } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    factory(require("expect.js"), require(process.cwd() + "/src/index"));
+    factory(require('expect.js'), require(process.cwd() + '/src/index'))
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.KuTalaiApi);
+    factory(root.expect, root.KuTalaiApi)
   }
 })(this, function (expect, KuTalaiApi) {
-  "use strict";
+  'use strict'
 
-  var instance;
+  var instance
 
   beforeEach(function () {
-    instance = new KuTalaiApi.Route();
-  });
+    instance = new KuTalaiApi.Route()
+  })
 
   var getProperty = function (object, getter, property) {
     // Use getter method if present; otherwise, get the property directly.
-    if (typeof object[getter] === "function") return object[getter]();
-    else return object[property];
-  };
+    if (typeof object[getter] === 'function') return object[getter]()
+    else return object[property]
+  }
 
   var setProperty = function (object, setter, property, value) {
     // Use setter method if present; otherwise, set the property directly.
-    if (typeof object[setter] === "function") object[setter](value);
-    else object[property] = value;
-  };
+    if (typeof object[setter] === 'function') object[setter](value)
+    else object[property] = value
+  }
 
-  describe("Route", function () {
-    it("should create an instance of Route", function () {
+  describe('Route', function () {
+    it('should create an instance of Route', function () {
       // uncomment below and update the code to test Route
       //var instance = new KuTalaiApi.Route();
       //expect(instance).to.be.a(KuTalaiApi.Route);
-    });
+    })
 
     it('should have the property id (base name: "id")', function () {
       // uncomment below and update the code to test the property id
       //var instance = new KuTalaiApi.Route();
       //expect(instance).to.be();
-    });
+    })
 
     it('should have the property routeNumber (base name: "routeNumber")', function () {
       // uncomment below and update the code to test the property routeNumber
       //var instance = new KuTalaiApi.Route();
       //expect(instance).to.be();
-    });
+    })
 
     it('should have the property name (base name: "name")', function () {
       // uncomment below and update the code to test the property name
       //var instance = new KuTalaiApi.Route();
       //expect(instance).to.be();
-    });
-  });
-});
+    })
+  })
+})

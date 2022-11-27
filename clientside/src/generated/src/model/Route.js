@@ -11,7 +11,7 @@
  *
  */
 
-import ApiClient from "../ApiClient";
+import ApiClient from '../ApiClient'
 
 /**
  * The Route model module.
@@ -24,7 +24,7 @@ class Route {
    * @alias module:model/Route
    */
   constructor() {
-    Route.initialize(this);
+    Route.initialize(this)
   }
 
   /**
@@ -43,22 +43,22 @@ class Route {
    */
   static constructFromObject(data, obj) {
     if (data) {
-      obj = obj || new Route();
+      obj = obj || new Route()
 
-      if (data.hasOwnProperty("id")) {
-        obj["id"] = ApiClient.convertToType(data["id"], "Number");
+      if (data.hasOwnProperty('id')) {
+        obj['id'] = ApiClient.convertToType(data['id'], 'Number')
       }
-      if (data.hasOwnProperty("routeNumber")) {
-        obj["routeNumber"] = ApiClient.convertToType(
-          data["routeNumber"],
-          "Number"
-        );
+      if (data.hasOwnProperty('routeNumber')) {
+        obj['routeNumber'] = ApiClient.convertToType(
+          data['routeNumber'],
+          'Number'
+        )
       }
-      if (data.hasOwnProperty("name")) {
-        obj["name"] = ApiClient.convertToType(data["name"], "String");
+      if (data.hasOwnProperty('name')) {
+        obj['name'] = ApiClient.convertToType(data['name'], 'String')
       }
     }
-    return obj;
+    return obj
   }
 
   /**
@@ -69,32 +69,32 @@ class Route {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data["name"] &&
-      !(typeof data["name"] === "string" || data["name"] instanceof String)
+      data['name'] &&
+      !(typeof data['name'] === 'string' || data['name'] instanceof String)
     ) {
       throw new Error(
-        "Expected the field `name` to be a primitive type in the JSON string but got " +
-          data["name"]
-      );
+        'Expected the field `name` to be a primitive type in the JSON string but got ' +
+          data['name']
+      )
     }
 
-    return true;
+    return true
   }
 }
 
 /**
  * @member {Number} id
  */
-Route.prototype["id"] = undefined;
+Route.prototype['id'] = undefined
 
 /**
  * @member {Number} routeNumber
  */
-Route.prototype["routeNumber"] = undefined;
+Route.prototype['routeNumber'] = undefined
 
 /**
  * @member {String} name
  */
-Route.prototype["name"] = undefined;
+Route.prototype['name'] = undefined
 
-export default Route;
+export default Route

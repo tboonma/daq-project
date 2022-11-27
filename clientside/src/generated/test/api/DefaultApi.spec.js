@@ -11,128 +11,128 @@
  *
  */
 
-(function (root, factory) {
-  if (typeof define === "function" && define.amd) {
+;(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
     // AMD.
-    define(["expect.js", process.cwd() + "/src/index"], factory);
-  } else if (typeof module === "object" && module.exports) {
+    define(['expect.js', process.cwd() + '/src/index'], factory)
+  } else if (typeof module === 'object' && module.exports) {
     // CommonJS-like environments that support module.exports, like Node.
-    factory(require("expect.js"), require(process.cwd() + "/src/index"));
+    factory(require('expect.js'), require(process.cwd() + '/src/index'))
   } else {
     // Browser globals (root is window)
-    factory(root.expect, root.KuTalaiApi);
+    factory(root.expect, root.KuTalaiApi)
   }
 })(this, function (expect, KuTalaiApi) {
-  "use strict";
+  'use strict'
 
-  var instance;
+  var instance
 
   beforeEach(function () {
-    instance = new KuTalaiApi.DefaultApi();
-  });
+    instance = new KuTalaiApi.DefaultApi()
+  })
 
   var getProperty = function (object, getter, property) {
     // Use getter method if present; otherwise, get the property directly.
-    if (typeof object[getter] === "function") return object[getter]();
-    else return object[property];
-  };
+    if (typeof object[getter] === 'function') return object[getter]()
+    else return object[property]
+  }
 
   var setProperty = function (object, setter, property, value) {
     // Use setter method if present; otherwise, set the property directly.
-    if (typeof object[setter] === "function") object[setter](value);
-    else object[property] = value;
-  };
+    if (typeof object[setter] === 'function') object[setter](value)
+    else object[property] = value
+  }
 
-  describe("DefaultApi", function () {
-    describe("controllerGetBusRoute", function () {
-      it("should call controllerGetBusRoute successfully", function (done) {
+  describe('DefaultApi', function () {
+    describe('controllerGetBusRoute', function () {
+      it('should call controllerGetBusRoute successfully', function (done) {
         //uncomment below and update the code to test controllerGetBusRoute
         //instance.controllerGetBusRoute(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
-        done();
-      });
-    });
-    describe("controllerGetBuses", function () {
-      it("should call controllerGetBuses successfully", function (done) {
+        done()
+      })
+    })
+    describe('controllerGetBuses', function () {
+      it('should call controllerGetBuses successfully', function (done) {
         //uncomment below and update the code to test controllerGetBuses
         //instance.controllerGetBuses(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
-        done();
-      });
-    });
-    describe("controllerGetBusstop", function () {
-      it("should call controllerGetBusstop successfully", function (done) {
+        done()
+      })
+    })
+    describe('controllerGetBusstop', function () {
+      it('should call controllerGetBusstop successfully', function (done) {
         //uncomment below and update the code to test controllerGetBusstop
         //instance.controllerGetBusstop(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
-        done();
-      });
-    });
-    describe("controllerGetBusstopWeather", function () {
-      it("should call controllerGetBusstopWeather successfully", function (done) {
+        done()
+      })
+    })
+    describe('controllerGetBusstopWeather', function () {
+      it('should call controllerGetBusstopWeather successfully', function (done) {
         //uncomment below and update the code to test controllerGetBusstopWeather
         //instance.controllerGetBusstopWeather(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
-        done();
-      });
-    });
-    describe("controllerGetBusstops", function () {
-      it("should call controllerGetBusstops successfully", function (done) {
+        done()
+      })
+    })
+    describe('controllerGetBusstops', function () {
+      it('should call controllerGetBusstops successfully', function (done) {
         //uncomment below and update the code to test controllerGetBusstops
         //instance.controllerGetBusstops(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
-        done();
-      });
-    });
-    describe("controllerGetPopulation", function () {
-      it("should call controllerGetPopulation successfully", function (done) {
+        done()
+      })
+    })
+    describe('controllerGetPopulation', function () {
+      it('should call controllerGetPopulation successfully', function (done) {
         //uncomment below and update the code to test controllerGetPopulation
         //instance.controllerGetPopulation(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
-        done();
-      });
-    });
-    describe("controllerGetRoutes", function () {
-      it("should call controllerGetRoutes successfully", function (done) {
+        done()
+      })
+    })
+    describe('controllerGetRoutes', function () {
+      it('should call controllerGetRoutes successfully', function (done) {
         //uncomment below and update the code to test controllerGetRoutes
         //instance.controllerGetRoutes(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
-        done();
-      });
-    });
-    describe("controllerGetTakableBus", function () {
-      it("should call controllerGetTakableBus successfully", function (done) {
+        done()
+      })
+    })
+    describe('controllerGetTakableBus', function () {
+      it('should call controllerGetTakableBus successfully', function (done) {
         //uncomment below and update the code to test controllerGetTakableBus
         //instance.controllerGetTakableBus(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
-        done();
-      });
-    });
-    describe("controllerPutPopulation", function () {
-      it("should call controllerPutPopulation successfully", function (done) {
+        done()
+      })
+    })
+    describe('controllerPutPopulation', function () {
+      it('should call controllerPutPopulation successfully', function (done) {
         //uncomment below and update the code to test controllerPutPopulation
         //instance.controllerPutPopulation(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
-        done();
-      });
-    });
-  });
-});
+        done()
+      })
+    })
+  })
+})
