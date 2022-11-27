@@ -11,6 +11,8 @@ env:
   DB_USER: ${{ secrets.DB_USER }}
   DB_PASSWD: ${{ secrets.DB_PASSWD }}
   DB_NAME: ${{ secrets.DB_NAME }}
+  AQICN_TOKEN: ${{ secrets.AQICN_TOKEN }}
+  IQAIR_TOKEN: ${{ secrets.IQAIR_TOKEN }}
 
 jobs:
   build:

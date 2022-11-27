@@ -44,6 +44,7 @@ def pm25_aqicn():
             print(f"[AQICN] Getting weather data for {result.name}...")
             response = requests.get(f"http://api.waqi.info/feed/geo:{result.lat};{result.lon}/?token={os.getenv('AQICN_TOKEN')}")
             data = response.json()
+            print(data)
             print(f"[AQICN] Inserting weather data for {result.name}...")
             with pool.connection() as conn, conn.cursor() as cs:
                 cs.execute("""
@@ -51,7 +52,7 @@ def pm25_aqicn():
                     VALUES (
                         %s, %s
                     )
-                """, [result.busstop_id, float(data['data']['aqi'])])
+                """, [result.busstop_id, data['data']['aqi']])
                 conn.commit()
             print(f"[AQICN] {result.name} weather data inserted...")
 
@@ -63,6 +64,7 @@ def iqair():
             print(f"[IQAir] Getting weather data for {result.name}...")
             response = requests.get(f"http://api.airvisual.com/v2/nearest_city?lat={result.lat}&lon={result.lon}&key={os.getenv('IQAIR_TOKEN')}")
             data = response.json()
+            print(data)
             print(f"[IQAir] Inserting weather data for {result.name}...")
             with pool.connection() as conn, conn.cursor() as cs:
                 cs.execute("""
