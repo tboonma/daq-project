@@ -11,7 +11,7 @@
  *
  */
 
-import ApiClient from '../ApiClient'
+import ApiClient from "../ApiClient";
 
 /**
  * The BusstopWeather model module.
@@ -24,7 +24,7 @@ class BusstopWeather {
    * @alias module:model/BusstopWeather
    */
   constructor() {
-    BusstopWeather.initialize(this)
+    BusstopWeather.initialize(this);
   }
 
   /**
@@ -43,19 +43,19 @@ class BusstopWeather {
    */
   static constructFromObject(data, obj) {
     if (data) {
-      obj = obj || new BusstopWeather()
+      obj = obj || new BusstopWeather();
 
-      if (data.hasOwnProperty('busstopId')) {
-        obj['busstopId'] = ApiClient.convertToType(data['busstopId'], 'Number')
+      if (data.hasOwnProperty("busstopId")) {
+        obj["busstopId"] = ApiClient.convertToType(data["busstopId"], "Number");
       }
-      if (data.hasOwnProperty('timestamp')) {
-        obj['timestamp'] = ApiClient.convertToType(data['timestamp'], 'String')
+      if (data.hasOwnProperty("timestamp")) {
+        obj["timestamp"] = ApiClient.convertToType(data["timestamp"], "String");
       }
-      if (data.hasOwnProperty('amount')) {
-        obj['amount'] = ApiClient.convertToType(data['amount'], 'Number')
+      if (data.hasOwnProperty("amount")) {
+        obj["amount"] = ApiClient.convertToType(data["amount"], "Number");
       }
     }
-    return obj
+    return obj;
   }
 
   /**
@@ -66,35 +66,35 @@ class BusstopWeather {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data['timestamp'] &&
+      data["timestamp"] &&
       !(
-        typeof data['timestamp'] === 'string' ||
-        data['timestamp'] instanceof String
+        typeof data["timestamp"] === "string" ||
+        data["timestamp"] instanceof String
       )
     ) {
       throw new Error(
-        'Expected the field `timestamp` to be a primitive type in the JSON string but got ' +
-          data['timestamp']
-      )
+        "Expected the field `timestamp` to be a primitive type in the JSON string but got " +
+          data["timestamp"]
+      );
     }
 
-    return true
+    return true;
   }
 }
 
 /**
  * @member {Number} busstopId
  */
-BusstopWeather.prototype['busstopId'] = undefined
+BusstopWeather.prototype["busstopId"] = undefined;
 
 /**
  * @member {String} timestamp
  */
-BusstopWeather.prototype['timestamp'] = undefined
+BusstopWeather.prototype["timestamp"] = undefined;
 
 /**
  * @member {Number} amount
  */
-BusstopWeather.prototype['amount'] = undefined
+BusstopWeather.prototype["amount"] = undefined;
 
-export default BusstopWeather
+export default BusstopWeather;

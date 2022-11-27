@@ -11,7 +11,7 @@
  *
  */
 
-import ApiClient from '../ApiClient'
+import ApiClient from "../ApiClient";
 
 /**
  * The Busstop model module.
@@ -24,7 +24,7 @@ class Busstop {
    * @alias module:model/Busstop
    */
   constructor() {
-    Busstop.initialize(this)
+    Busstop.initialize(this);
   }
 
   /**
@@ -43,22 +43,22 @@ class Busstop {
    */
   static constructFromObject(data, obj) {
     if (data) {
-      obj = obj || new Busstop()
+      obj = obj || new Busstop();
 
-      if (data.hasOwnProperty('busstopId')) {
-        obj['busstopId'] = ApiClient.convertToType(data['busstopId'], 'Number')
+      if (data.hasOwnProperty("busstopId")) {
+        obj["busstopId"] = ApiClient.convertToType(data["busstopId"], "Number");
       }
-      if (data.hasOwnProperty('name')) {
-        obj['name'] = ApiClient.convertToType(data['name'], 'String')
+      if (data.hasOwnProperty("name")) {
+        obj["name"] = ApiClient.convertToType(data["name"], "String");
       }
-      if (data.hasOwnProperty('lat')) {
-        obj['lat'] = ApiClient.convertToType(data['lat'], 'Number')
+      if (data.hasOwnProperty("lat")) {
+        obj["lat"] = ApiClient.convertToType(data["lat"], "Number");
       }
-      if (data.hasOwnProperty('lon')) {
-        obj['lon'] = ApiClient.convertToType(data['lon'], 'Number')
+      if (data.hasOwnProperty("lon")) {
+        obj["lon"] = ApiClient.convertToType(data["lon"], "Number");
       }
     }
-    return obj
+    return obj;
   }
 
   /**
@@ -69,37 +69,37 @@ class Busstop {
   static validateJSON(data) {
     // ensure the json data is a string
     if (
-      data['name'] &&
-      !(typeof data['name'] === 'string' || data['name'] instanceof String)
+      data["name"] &&
+      !(typeof data["name"] === "string" || data["name"] instanceof String)
     ) {
       throw new Error(
-        'Expected the field `name` to be a primitive type in the JSON string but got ' +
-          data['name']
-      )
+        "Expected the field `name` to be a primitive type in the JSON string but got " +
+          data["name"]
+      );
     }
 
-    return true
+    return true;
   }
 }
 
 /**
  * @member {Number} busstopId
  */
-Busstop.prototype['busstopId'] = undefined
+Busstop.prototype["busstopId"] = undefined;
 
 /**
  * @member {String} name
  */
-Busstop.prototype['name'] = undefined
+Busstop.prototype["name"] = undefined;
 
 /**
  * @member {Number} lat
  */
-Busstop.prototype['lat'] = undefined
+Busstop.prototype["lat"] = undefined;
 
 /**
  * @member {Number} lon
  */
-Busstop.prototype['lon'] = undefined
+Busstop.prototype["lon"] = undefined;
 
-export default Busstop
+export default Busstop;
