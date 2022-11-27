@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 
-function Navbar() {
-  const [isShow, setIsShow] = useState(false);
+const Navbar = () => {
+  const [isShow, setIsShow] = useState(false)
 
   return (
     <nav className="flex items-center justify-between flex-wrap bg-teal-500 p-6">
@@ -33,9 +33,11 @@ function Navbar() {
         </button>
       </div>
       <div
-        className={`w-full flex-grow md:flex md:items-center md:w-auto ${isShow ? '' : 'hidden'}`}
+        className={`w-full flex-grow md:flex md:items-center md:w-auto ${
+          isShow ? '' : 'hidden'
+        }`}
       >
-        <div className="text-sm md:flex-grow" />
+        <div className="text-sm md:flex-grow"></div>
         <div>
           <a
             href="#responsive-header"
@@ -58,7 +60,7 @@ function Navbar() {
         </div>
       </div>
     </nav>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar

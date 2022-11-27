@@ -1,26 +1,24 @@
-import './App.css';
-import {
-  MapContainer, TileLayer, Marker, Popup,
-} from 'react-leaflet';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-import { useState, useEffect } from 'react';
-import DefaultApi from 'ku_talai_api/src/api/DefaultApi';
-import Navbar from './components/Navbar';
+import './App.css'
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import Navbar from './components/Navbar'
+import InputLabel from '@mui/material/InputLabel'
+import MenuItem from '@mui/material/MenuItem'
+import FormControl from '@mui/material/FormControl'
+import Select from '@mui/material/Select'
+import { useState, useEffect } from 'react'
+import DefaultApi from './generated/src/api/DefaultApi'
 
 function App() {
-  const [origin, setOrigin] = useState('');
-  const [destination, setDestination] = useState('');
-  const [busstops, setBusstops] = useState([]);
-  const api = new DefaultApi();
+  const [origin, setOrigin] = useState('')
+  const [destination, setDestination] = useState('')
+  const [busstops, setBusstops] = useState([])
+  const api = new DefaultApi()
 
   useEffect(() => {
     api.controllerGetBusstops((err, data, res) => {
-      setBusstops(data);
-    });
-  });
+      setBusstops(data)
+    })
+  })
 
   return (
     <div className="">
@@ -28,7 +26,7 @@ function App() {
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
         integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-        crossOrigin=""
+        crossorigin=""
       />
       <Navbar />
       <div className="pt-10 md:pt-20 md:px-14 md:flex md:space-x-3">
@@ -43,10 +41,17 @@ function App() {
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <Marker position={[destination.lat ?? 13.848584, destination.lon ?? 100.571825]}>
+            <Marker
+              position={[
+                destination.lat ?? 13.848584,
+                destination.lon ?? 100.571825
+              ]}
+            >
               <Popup>{destination.name ?? 'Please select destination'}</Popup>
             </Marker>
-            <Marker position={[origin.lat ?? 13.848584, origin.lon ?? 100.571825]}>
+            <Marker
+              position={[origin.lat ?? 13.848584, origin.lon ?? 100.571825]}
+            >
               <Popup>{origin.name ?? 'Please select starting point'}</Popup>
             </Marker>
           </MapContainer>
@@ -91,7 +96,7 @@ function App() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
