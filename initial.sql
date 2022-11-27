@@ -9,20 +9,9 @@ CREATE TABLE IF NOT EXISTS bus_stop (
 -- create route table
 CREATE TABLE IF NOT EXISTS `route` (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    route_number INT NOT NULL,
-    name varchar(200) NOT NULL
-);
-
--- create bus table
-CREATE TABLE IF NOT EXISTS bus (
-    id INT NOT NULL AUTO_INCREMENT,
     bus_number INT NOT NULL,
     bus_stop_id INT NOT NULL,
-    route_id INT NOT NULL,
-    PRIMARY KEY (id),
-    UNIQUE (bus_number),
-    FOREIGN KEY (bus_stop_id) REFERENCES bus_stop(bus_stop_id),
-    FOREIGN KEY (route_id) REFERENCES route(id)
+    FOREIGN KEY (bus_stop_id) REFERENCES bus_stop(bus_stop_id)
 );
 
 -- create open meteo table
