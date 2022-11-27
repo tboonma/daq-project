@@ -51,7 +51,7 @@ def pm25_aqicn():
                     VALUES (
                         %s, %s
                     )
-                """, [result.busstop_id, data['data']['aqi']])
+                """, [result.busstop_id, float(data['data']['aqi'])])
                 conn.commit()
             print(f"[AQICN] {result.name} weather data inserted...")
 
