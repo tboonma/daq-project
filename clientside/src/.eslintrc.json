@@ -16,7 +16,7 @@
   "extends": ["prettier", "eslint:recommended", "plugin:react/recommended"],
   "rules": {
     "prettier/prettier": "error",
-    "eqeqeq": 0
+    "eqeqeq": "ignore"
   },
   "settings": {
     "react": {
