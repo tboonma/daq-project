@@ -18,7 +18,7 @@ function App() {
     api.controllerGetBusstops((err, data, res) => {
       setBusstops(data)
     })
-  })
+  }, [])
 
   return (
     <div className="">
