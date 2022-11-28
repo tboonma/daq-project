@@ -56,3 +56,14 @@ CREATE TABLE IF NOT EXISTS `population` (
   PRIMARY KEY (id),
   FOREIGN KEY (bus_stop_id) REFERENCES bus_stop(bus_stop_id)
 );
+
+-- create weather table
+CREATE TABLE IF NOT EXISTS weather (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  ts INT NOT NULL,
+  bus_stop_id INT NOT NULL,
+  sensor VARCHAR(100) NOT NULL,
+  source VARCHAR(100) NOT NULL,
+  value FLOAT NOT NULL,
+  FOREIGN KEY (bus_stop_id) REFERENCES bus_stop(bus_stop_id)
+)
