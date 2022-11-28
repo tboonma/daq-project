@@ -107,7 +107,7 @@ var callback = function(error, data, response) {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 };
 api.controllerGetBusRoute(busId, callback);
@@ -121,7 +121,6 @@ All URIs are relative to *http://127.0.0.1:8080/talai-api/v1*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *KuTalaiApi.DefaultApi* | [**controllerGetBusRoute**](docs/DefaultApi.md#controllerGetBusRoute) | **GET** /route/{busId} | Returns all bus stops for given route
-*KuTalaiApi.DefaultApi* | [**controllerGetBuses**](docs/DefaultApi.md#controllerGetBuses) | **GET** /buses | Returns all KU Talai bus number
 *KuTalaiApi.DefaultApi* | [**controllerGetBusstop**](docs/DefaultApi.md#controllerGetBusstop) | **GET** /busstop/{stopId} | Returns complete details of the specified Talai bus stop
 *KuTalaiApi.DefaultApi* | [**controllerGetBusstopWeather**](docs/DefaultApi.md#controllerGetBusstopWeather) | **GET** /busstop/{stopId}/weather | Returns weather detail of the specified Talai bus stop
 *KuTalaiApi.DefaultApi* | [**controllerGetBusstops**](docs/DefaultApi.md#controllerGetBusstops) | **GET** /busstops | Returns list of Talai bus stops in KU

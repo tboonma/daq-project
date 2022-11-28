@@ -13,6 +13,7 @@
 
 
 import ApiClient from "../ApiClient";
+import Bus from '../model/Bus';
 import Busstop from '../model/Busstop';
 import BusstopWeather from '../model/BusstopWeather';
 import PopulationDensity from '../model/PopulationDensity';
@@ -41,7 +42,7 @@ export default class DefaultApi {
      * Callback function to receive the result of the controllerGetBusRoute operation.
      * @callback module:api/DefaultApi~controllerGetBusRouteCallback
      * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
+     * @param {module:model/Bus} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -49,6 +50,7 @@ export default class DefaultApi {
      * Returns all bus stops for given route
      * @param {Number} busId 
      * @param {module:api/DefaultApi~controllerGetBusRouteCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link module:model/Bus}
      */
     controllerGetBusRoute(busId, callback) {
       let postBody = null;
@@ -69,45 +71,10 @@ export default class DefaultApi {
 
       let authNames = [];
       let contentTypes = [];
-      let accepts = [];
-      let returnType = null;
+      let accepts = ['application/json'];
+      let returnType = Bus;
       return this.apiClient.callApi(
         '/route/{busId}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
-      );
-    }
-
-    /**
-     * Callback function to receive the result of the controllerGetBuses operation.
-     * @callback module:api/DefaultApi~controllerGetBusesCallback
-     * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Returns all KU Talai bus number
-     * @param {module:api/DefaultApi~controllerGetBusesCallback} callback The callback function, accepting three arguments: error, data, response
-     */
-    controllerGetBuses(callback) {
-      let postBody = null;
-
-      let pathParams = {
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = [];
-      let contentTypes = [];
-      let accepts = [];
-      let returnType = null;
-      return this.apiClient.callApi(
-        '/buses', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

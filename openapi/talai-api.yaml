@@ -97,13 +97,10 @@ paths:
       responses:
         200:
           description: Success
-  /buses:
-    get:
-      summary: Returns all KU Talai bus number
-      operationId: controller.get_buses
-      responses:
-        200:
-          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bus'
   /population/{stopId}:
     parameters:
       - name: stopId
@@ -146,23 +143,17 @@ components:
     Route:
       type: object
       properties:
-        id:
-          type: integer
         routeNumber:
           type: integer
-        name:
-          type: string
     Bus:
       type: object
       properties:
-        id:
-          type: object
         bus_number:
           type: integer
-        bus_stop_id:
-          type: integer
-        route_id:
-          type: integer
+        bus_stops:
+          type: array
+          items:
+            type: integer
     BusstopWeather:
       type: object
       properties:

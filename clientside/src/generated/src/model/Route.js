@@ -47,14 +47,8 @@ class Route {
         if (data) {
             obj = obj || new Route();
 
-            if (data.hasOwnProperty('id')) {
-                obj['id'] = ApiClient.convertToType(data['id'], 'Number');
-            }
             if (data.hasOwnProperty('routeNumber')) {
                 obj['routeNumber'] = ApiClient.convertToType(data['routeNumber'], 'Number');
-            }
-            if (data.hasOwnProperty('name')) {
-                obj['name'] = ApiClient.convertToType(data['name'], 'String');
             }
         }
         return obj;
@@ -66,10 +60,6 @@ class Route {
      * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Route</code>.
      */
     static validateJSON(data) {
-        // ensure the json data is a string
-        if (data['name'] && !(typeof data['name'] === 'string' || data['name'] instanceof String)) {
-            throw new Error("Expected the field `name` to be a primitive type in the JSON string but got " + data['name']);
-        }
 
         return true;
     }
@@ -80,19 +70,9 @@ class Route {
 
 
 /**
- * @member {Number} id
- */
-Route.prototype['id'] = undefined;
-
-/**
  * @member {Number} routeNumber
  */
 Route.prototype['routeNumber'] = undefined;
-
-/**
- * @member {String} name
- */
-Route.prototype['name'] = undefined;
 
 
 

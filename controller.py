@@ -61,16 +61,43 @@ def get_busstop_weather(stop_id):
             return models.BusstopWeather(*result)
 
 def get_routes():
-    return "Doing something"
+    logging.info("Connecting to database...")
+    with pool.connection() as conn, conn.cursor() as cs:
+        logging.info("Executing query...")
+        cs.execute("""
+            SELECT DISTINCT bus_number
+            FROM route
+        """)
+        logging.info("Returning result...")
+        result = [models.Route(*row) for row in cs.fetchall()]
+        return result
 
 def get_takable_bus(stop_id_origin, stop_id_dest):
-    return "Doing something"
+    logging.info("Connecting to database...")
+    with pool.connection() as conn, conn.cursor() as cs:
+        logging.info("Executing query...")
+        cs.execute("""
+            SELECT DISTINCT r1.bus_number
+            FROM route r1
+            INNER JOIN route r2
+            WHERE r1.bus_number=r2.bus_number AND r1.bus_stop_id=%s AND r2.bus_stop_id=%s
+        """, [stop_id_origin, stop_id_dest])
+        logging.info("Returning result...")
+        result = [models.Route(*row) for row in cs.fetchall()]
+        return result
 
 def get_bus_route(bus_id):
-    return "Doing something"
-
-def get_buses():
-    return "Doing something"
+    logging.info("Connecting to database...")
+    with pool.connection() as conn, conn.cursor() as cs:
+        logging.info("Executing query...")
+        cs.execute("""
+            SELECT DISTINCT bus_number, bus_stop_id
+            FROM route
+            WHERE bus_number=%s
+        """, [bus_id])
+        logging.info("Returning result...")
+        busstops = [number for (_, number) in cs.fetchall()]
+        return models.Bus(bus_id, busstops)
 
 def put_population(stop_id):
     with pool.connection() as conn, conn.cursor() as cs:

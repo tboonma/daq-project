@@ -4,8 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Number** |  | [optional] 
 **routeNumber** | **Number** |  | [optional] 
-**name** | **String** |  | [optional] 
 
 

@@ -29,14 +29,6 @@ paths:
           description: Success
       summary: Returns list of takable bus from origin to destination
       x-openapi-router-controller: openapi_server.controllers.default_controller
-  /buses:
-    get:
-      operationId: controller_get_buses
-      responses:
-        "200":
-          description: Success
-      summary: Returns all KU Talai bus number
-      x-openapi-router-controller: openapi_server.controllers.default_controller
   /busstop/{stopId}:
     get:
       operationId: controller_get_busstop
@@ -141,6 +133,10 @@ paths:
         style: simple
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bus'
           description: Success
       summary: Returns all bus stops for given route
       x-openapi-router-controller: openapi_server.controllers.default_controller
@@ -183,31 +179,29 @@ components:
       type: object
     Route:
       example:
-        routeNumber: 6
-        name: name
-        id: 0
+        routeNumber: 0
       properties:
-        id:
-          title: id
-          type: integer
         routeNumber:
           title: routeNumber
           type: integer
-        name:
-          title: name
-          type: string
       title: Route
       type: object
     Bus:
+      example:
+        bus_number: 0
+        bus_stops:
+        - 6
+        - 6
       properties:
-        id:
-          type: object
         bus_number:
+          title: bus_number
           type: integer
-        bus_stop_id:
-          type: integer
-        route_id:
-          type: integer
+        bus_stops:
+          items:
+            type: integer
+          title: bus_stops
+          type: array
+      title: Bus
       type: object
     BusstopWeather:
       example:

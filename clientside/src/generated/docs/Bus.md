@@ -4,9 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **Object** |  | [optional] 
 **busNumber** | **Number** |  | [optional] 
-**busStopId** | **Number** |  | [optional] 
-**routeId** | **Number** |  | [optional] 
+**busStops** | **[Number]** |  | [optional] 
 
 

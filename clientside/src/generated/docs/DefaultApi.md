@@ -5,7 +5,6 @@ All URIs are relative to *http://127.0.0.1:8080/talai-api/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**controllerGetBusRoute**](DefaultApi.md#controllerGetBusRoute) | **GET** /route/{busId} | Returns all bus stops for given route
-[**controllerGetBuses**](DefaultApi.md#controllerGetBuses) | **GET** /buses | Returns all KU Talai bus number
 [**controllerGetBusstop**](DefaultApi.md#controllerGetBusstop) | **GET** /busstop/{stopId} | Returns complete details of the specified Talai bus stop
 [**controllerGetBusstopWeather**](DefaultApi.md#controllerGetBusstopWeather) | **GET** /busstop/{stopId}/weather | Returns weather detail of the specified Talai bus stop
 [**controllerGetBusstops**](DefaultApi.md#controllerGetBusstops) | **GET** /busstops | Returns list of Talai bus stops in KU
@@ -18,7 +17,7 @@ Method | HTTP request | Description
 
 ## controllerGetBusRoute
 
-> controllerGetBusRoute(busId)
+> Bus controllerGetBusRoute(busId)
 
 Returns all bus stops for given route
 
@@ -33,7 +32,7 @@ apiInstance.controllerGetBusRoute(busId, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 });
 ```
@@ -47,7 +46,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+[**Bus**](Bus.md)
 
 ### Authorization
 
@@ -56,46 +55,7 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
-
-
-## controllerGetBuses
-
-> controllerGetBuses()
-
-Returns all KU Talai bus number
-
-### Example
-
-```javascript
-import KuTalaiApi from 'ku_talai_api';
-
-let apiInstance = new KuTalaiApi.DefaultApi();
-apiInstance.controllerGetBuses((error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully.');
-  }
-});
-```
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 
 ## controllerGetBusstop

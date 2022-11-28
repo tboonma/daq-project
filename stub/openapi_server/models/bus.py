@@ -15,36 +15,26 @@ class Bus(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, bus_number=None, bus_stop_id=None, route_id=None):  # noqa: E501
+    def __init__(self, bus_number=None, bus_stops=None):  # noqa: E501
         """Bus - a model defined in OpenAPI
 
-        :param id: The id of this Bus.  # noqa: E501
-        :type id: object
         :param bus_number: The bus_number of this Bus.  # noqa: E501
         :type bus_number: int
-        :param bus_stop_id: The bus_stop_id of this Bus.  # noqa: E501
-        :type bus_stop_id: int
-        :param route_id: The route_id of this Bus.  # noqa: E501
-        :type route_id: int
+        :param bus_stops: The bus_stops of this Bus.  # noqa: E501
+        :type bus_stops: List[int]
         """
         self.openapi_types = {
-            'id': object,
             'bus_number': int,
-            'bus_stop_id': int,
-            'route_id': int
+            'bus_stops': List[int]
         }
 
         self.attribute_map = {
-            'id': 'id',
             'bus_number': 'bus_number',
-            'bus_stop_id': 'bus_stop_id',
-            'route_id': 'route_id'
+            'bus_stops': 'bus_stops'
         }
 
-        self._id = id
         self._bus_number = bus_number
-        self._bus_stop_id = bus_stop_id
-        self._route_id = route_id
+        self._bus_stops = bus_stops
 
     @classmethod
     def from_dict(cls, dikt) -> 'Bus':
@@ -56,27 +46,6 @@ class Bus(Model):
         :rtype: Bus
         """
         return util.deserialize_model(dikt, cls)
-
-    @property
-    def id(self):
-        """Gets the id of this Bus.
-
-
-        :return: The id of this Bus.
-        :rtype: object
-        """
-        return self._id
-
-    @id.setter
-    def id(self, id):
-        """Sets the id of this Bus.
-
-
-        :param id: The id of this Bus.
-        :type id: object
-        """
-
-        self._id = id
 
     @property
     def bus_number(self):
@@ -100,43 +69,22 @@ class Bus(Model):
         self._bus_number = bus_number
 
     @property
-    def bus_stop_id(self):
-        """Gets the bus_stop_id of this Bus.
+    def bus_stops(self):
+        """Gets the bus_stops of this Bus.
 
 
-        :return: The bus_stop_id of this Bus.
-        :rtype: int
+        :return: The bus_stops of this Bus.
+        :rtype: List[int]
         """
-        return self._bus_stop_id
+        return self._bus_stops
 
-    @bus_stop_id.setter
-    def bus_stop_id(self, bus_stop_id):
-        """Sets the bus_stop_id of this Bus.
-
-
-        :param bus_stop_id: The bus_stop_id of this Bus.
-        :type bus_stop_id: int
-        """
-
-        self._bus_stop_id = bus_stop_id
-
-    @property
-    def route_id(self):
-        """Gets the route_id of this Bus.
+    @bus_stops.setter
+    def bus_stops(self, bus_stops):
+        """Sets the bus_stops of this Bus.
 
 
-        :return: The route_id of this Bus.
-        :rtype: int
-        """
-        return self._route_id
-
-    @route_id.setter
-    def route_id(self, route_id):
-        """Sets the route_id of this Bus.
-
-
-        :param route_id: The route_id of this Bus.
-        :type route_id: int
+        :param bus_stops: The bus_stops of this Bus.
+        :type bus_stops: List[int]
         """
 
-        self._route_id = route_id
+        self._bus_stops = bus_stops

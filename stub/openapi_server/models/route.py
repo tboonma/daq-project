@@ -15,31 +15,21 @@ class Route(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, id=None, route_number=None, name=None):  # noqa: E501
+    def __init__(self, route_number=None):  # noqa: E501
         """Route - a model defined in OpenAPI
 
-        :param id: The id of this Route.  # noqa: E501
-        :type id: int
         :param route_number: The route_number of this Route.  # noqa: E501
         :type route_number: int
-        :param name: The name of this Route.  # noqa: E501
-        :type name: str
         """
         self.openapi_types = {
-            'id': int,
-            'route_number': int,
-            'name': str
+            'route_number': int
         }
 
         self.attribute_map = {
-            'id': 'id',
-            'route_number': 'routeNumber',
-            'name': 'name'
+            'route_number': 'routeNumber'
         }
 
-        self._id = id
         self._route_number = route_number
-        self._name = name
 
     @classmethod
     def from_dict(cls, dikt) -> 'Route':
@@ -51,27 +41,6 @@ class Route(Model):
         :rtype: Route
         """
         return util.deserialize_model(dikt, cls)
-
-    @property
-    def id(self):
-        """Gets the id of this Route.
-
-
-        :return: The id of this Route.
-        :rtype: int
-        """
-        return self._id
-
-    @id.setter
-    def id(self, id):
-        """Sets the id of this Route.
-
-
-        :param id: The id of this Route.
-        :type id: int
-        """
-
-        self._id = id
 
     @property
     def route_number(self):
@@ -93,24 +62,3 @@ class Route(Model):
         """
 
         self._route_number = route_number
-
-    @property
-    def name(self):
-        """Gets the name of this Route.
-
-
-        :return: The name of this Route.
-        :rtype: str
-        """
-        return self._name
-
-    @name.setter
-    def name(self, name):
-        """Sets the name of this Route.
-
-
-        :param name: The name of this Route.
-        :type name: str
-        """
-
-        self._name = name

@@ -4,6 +4,7 @@ from typing import Dict
 from typing import Tuple
 from typing import Union
 
+from openapi_server.models.bus import Bus  # noqa: E501
 from openapi_server.models.busstop import Busstop  # noqa: E501
 from openapi_server.models.busstop_weather import BusstopWeather  # noqa: E501
 from openapi_server.models.population_density import PopulationDensity  # noqa: E501
@@ -19,18 +20,7 @@ def controller_get_bus_route(bus_id):  # noqa: E501
     :param bus_id: 
     :type bus_id: int
 
-    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
-    """
-    return 'do some magic!'
-
-
-def controller_get_buses():  # noqa: E501
-    """Returns all KU Talai bus number
-
-     # noqa: E501
-
-
-    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
+    :rtype: Union[Bus, Tuple[Bus, int], Tuple[Bus, int, Dict[str, str]]
     """
     return 'do some magic!'
 

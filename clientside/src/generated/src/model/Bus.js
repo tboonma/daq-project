@@ -47,17 +47,11 @@ class Bus {
         if (data) {
             obj = obj || new Bus();
 
-            if (data.hasOwnProperty('id')) {
-                obj['id'] = ApiClient.convertToType(data['id'], Object);
-            }
             if (data.hasOwnProperty('bus_number')) {
                 obj['bus_number'] = ApiClient.convertToType(data['bus_number'], 'Number');
             }
-            if (data.hasOwnProperty('bus_stop_id')) {
-                obj['bus_stop_id'] = ApiClient.convertToType(data['bus_stop_id'], 'Number');
-            }
-            if (data.hasOwnProperty('route_id')) {
-                obj['route_id'] = ApiClient.convertToType(data['route_id'], 'Number');
+            if (data.hasOwnProperty('bus_stops')) {
+                obj['bus_stops'] = ApiClient.convertToType(data['bus_stops'], ['Number']);
             }
         }
         return obj;
@@ -69,6 +63,10 @@ class Bus {
      * @return {boolean} to indicate whether the JSON data is valid with respect to <code>Bus</code>.
      */
     static validateJSON(data) {
+        // ensure the json data is an array
+        if (!Array.isArray(data['bus_stops'])) {
+            throw new Error("Expected the field `bus_stops` to be an array in the JSON data but got " + data['bus_stops']);
+        }
 
         return true;
     }
@@ -79,24 +77,14 @@ class Bus {
 
 
 /**
- * @member {Object} id
- */
-Bus.prototype['id'] = undefined;
-
-/**
  * @member {Number} bus_number
  */
 Bus.prototype['bus_number'] = undefined;
 
 /**
- * @member {Number} bus_stop_id
+ * @member {Array.<Number>} bus_stops
  */
-Bus.prototype['bus_stop_id'] = undefined;
-
-/**
- * @member {Number} route_id
- */
-Bus.prototype['route_id'] = undefined;
+Bus.prototype['bus_stops'] = undefined;
 
 
 
