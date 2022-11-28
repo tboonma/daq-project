@@ -15,8 +15,13 @@ function App() {
   const [destination, setDestination] = useState('')
   const [busstops, setBusstops] = useState([])
   const [displayInsertButton, setInsertButton] = useState(false)
-  const apiClient = new ApiClient("/talai-api/v1")
-  const api = new DefaultApi(apiClient)
+  let api = undefined
+  if (window.location.href.includes('localhost')) {
+    api = new DefaultApi()
+  } else {
+    const apiClient = new ApiClient('/talai-api/v1')
+    api = new DefaultApi(apiClient)
+  }
 
   const insertPopulation = (e) => {
     e.preventDefault()
