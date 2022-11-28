@@ -36,6 +36,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Busstop'
+          links:
+            temperature:
+              operationId: controller.get_busstop_weather
+              parameters:
+                stopId: $response.body#/stopId
+            aqi:
+              operationId: controller.get_busstop_aqi
+              parameters:
+                stopId: $response.body#/stopId
+            population:
+              operationId: controller.get_population
+                stopId: $response.body#/stopId
   /busstop/{stopId}/temperature:
     parameters:
       - name: stopId
@@ -111,6 +123,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Route'
+          links:
+            originTemperature:
+              operationId: controller.get_busstop_weather
+              parameters:
+                stopId: $response.body#/stopIdOrigin
+            originAqi:
+              operationId: controller.get_busstop_aqi
+              parameters:
+                stopId: $response.body#/stopIdOrigin
+            originPopulation:
+              operationId: controller.get_population
+                stopId: $response.body#/stopIdOrigin
+            destTemperature:
+              operationId: controller.get_busstop_weather
+              parameters:
+                stopId: $response.body#/stopIdDest
+            destAqi:
+              operationId: controller.get_busstop_aqi
+              parameters:
+                stopId: $response.body#/stopIdDest
+            destPopulation:
+              operationId: controller.get_population
+                stopId: $response.body#/stopIdDest
   /route/{busId}:
     parameters:
       - name: busId
@@ -157,6 +192,11 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/PopulationDensity'
+          links:
+            busstopInfo:
+              operationId: controller.get_busstop
+              parameters:
+                stopId: $response.body#/stopId
 
 components:
   schemas:
