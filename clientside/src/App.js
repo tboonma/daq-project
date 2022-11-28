@@ -5,6 +5,7 @@ import InputLabel from '@mui/material/InputLabel'
 import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
+import Button from '@mui/material/Button'
 import React, { useState, useEffect } from 'react'
 import DefaultApi from './generated/src/api/DefaultApi'
 import ApiClient from './generated/src/ApiClient'
@@ -13,8 +14,20 @@ function App() {
   const [origin, setOrigin] = useState('')
   const [destination, setDestination] = useState('')
   const [busstops, setBusstops] = useState([])
+  const [displayInsertButton, setInsertButton] = useState(false)
   const apiClient = new ApiClient("/talai-api/v1")
   const api = new DefaultApi(apiClient)
+
+  const insertPopulation = (e) => {
+    e.preventDefault()
+    api.controllerPutPopulation(origin.busstopId, () => setInsertButton(false))
+  }
+
+  const changeOriginHandler = (event) => {
+    event.preventDefault()
+    setOrigin(event.target.value)
+    setInsertButton(true)
+  }
 
   useEffect(() => {
     api.controllerGetBusstops((err, data, res) => {
@@ -68,7 +81,7 @@ function App() {
                 id="demo-select-small"
                 value={origin}
                 label="origin"
-                onChange={(e) => setOrigin(e.target.value)}
+                onChange={changeOriginHandler}
               >
                 {busstops.map((busstop) => (
                   <MenuItem key={busstop.busstopId} value={busstop}>
@@ -77,6 +90,11 @@ function App() {
                 ))}
               </Select>
             </FormControl>
+            {displayInsertButton && (
+              <Button variant="contained" onClick={insertPopulation}>
+                {"I'M HERE"}
+              </Button>
+            )}
             <h1>To</h1>
             <FormControl className="w-5/6" size="small">
               <InputLabel id="demo-select-small">Destination</InputLabel>

@@ -33,7 +33,7 @@ npm i
 5. Run project locally
 
 ```
-python app.py
+npm start
 ```
 
 ### Add an endpoint

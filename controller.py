@@ -4,6 +4,9 @@ import pymysql
 from dbutils.pooled_db import PooledDB
 from config import OPENAPI_STUB_DIR, DB_HOST, DB_USER, DB_PASSWD, DB_NAME
 import logging
+from datetime import datetime, timezone, timedelta
+
+th_timezone = timezone(timedelta(hours=7))
 
 sys.path.append(OPENAPI_STUB_DIR)
 from openapi_server import models
@@ -55,8 +58,25 @@ def get_bus_route(bus_id):
 def get_buses():
     return "Doing something"
 
-def put_population():
-    return "Doing something"
+def put_population(stop_id):
 
-def get_population():
+    with pool.connection() as conn, conn.cursor() as cs:
+        cs.execute("""
+            INSERT INTO population (ts, bus_stop_id)
+            VALUES (
+                %s, %s
+            )
+        """, [datetime.now(th_timezone), stop_id])
+        conn.commit()
+    return "Success"
+
+def get_population(stop_id):
+    with pool.connection() as conn, conn.cursor() as cs:
+        cs.execute("""
+            SELECT COUNT(*), TIMESTAMP(DATE(ts), (HOUR(ts) DIV 6)*6*10000) AS d
+            FROM population
+            GROUP BY d
+        """, [stop_id])
+        result = cs.fetchall()
+        print(result)
     return "Doing something"

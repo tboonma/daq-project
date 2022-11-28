@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "cd clientside && npm run build && cd .. && python app.py",
     "gen-server": "openapi-generator-cli generate -i openapi/talai-api.yaml -g python-flask -o stub/"
   },
   "repository": {
