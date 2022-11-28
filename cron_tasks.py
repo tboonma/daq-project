@@ -95,11 +95,10 @@ def generate_population():
     results = get_busstops()
     if results:
         for result in results:
-            has_people = random.choice([True, False])
-            if not has_people:
-                continue
             print(f"[Population] Generating population for {result.name}...")
-            people = random.randint(1, 5)
+            people = random.randint(0, 3)
+            if people == 0:
+                continue
             print(f"[Population] Inserting {people} population for {result.name}...")
             for _ in range(people):
                 with pool.connection() as conn, conn.cursor() as cs:
