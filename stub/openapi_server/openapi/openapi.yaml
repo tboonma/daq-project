@@ -33,6 +33,31 @@ paths:
                   $ref: '#/components/schemas/Route'
                 type: array
           description: Success
+          links:
+            originTemperature:
+              operationId: controller.get_busstop_weather
+              parameters:
+                stopId: $response.body#/stopIdOrigin
+            originAqi:
+              operationId: controller.get_busstop_aqi
+              parameters:
+                stopId: $response.body#/stopIdOrigin
+            originPopulation:
+              operationId: controller.get_population
+              parameters:
+                stopId: $response.body#/stopIdOrigin
+            destTemperature:
+              operationId: controller.get_busstop_weather
+              parameters:
+                stopId: $response.body#/stopIdDest
+            destAqi:
+              operationId: controller.get_busstop_aqi
+              parameters:
+                stopId: $response.body#/stopIdDest
+            destPopulation:
+              operationId: controller.get_population
+              parameters:
+                stopId: $response.body#/stopIdDest
       summary: Returns list of takable bus from origin to destination
       x-openapi-router-controller: openapi_server.controllers.default_controller
   /busstop/{stopId}:
@@ -53,6 +78,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/Busstop'
           description: Success
+          links:
+            temperature:
+              operationId: controller.get_busstop_weather
+              parameters:
+                stopId: $response.body#/stopId
+            aqi:
+              operationId: controller.get_busstop_aqi
+              parameters:
+                stopId: $response.body#/stopId
+            population:
+              operationId: controller.get_population
+              parameters:
+                stopId: $response.body#/stopId
       summary: Returns complete details of the specified Talai bus stop
       x-openapi-router-controller: openapi_server.controllers.default_controller
   /busstop/{stopId}/aqi:
@@ -133,6 +171,11 @@ paths:
                   $ref: '#/components/schemas/PopulationDensity'
                 type: array
           description: Success
+          links:
+            busstopInfo:
+              operationId: controller.get_busstop
+              parameters:
+                stopId: $response.body#/stopId
       summary: Get population density in each KU Talai bus
       x-openapi-router-controller: openapi_server.controllers.default_controller
     put:

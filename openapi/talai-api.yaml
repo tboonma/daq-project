@@ -47,6 +47,7 @@ paths:
                 stopId: $response.body#/stopId
             population:
               operationId: controller.get_population
+              parameters:
                 stopId: $response.body#/stopId
   /busstop/{stopId}/temperature:
     parameters:
@@ -134,6 +135,7 @@ paths:
                 stopId: $response.body#/stopIdOrigin
             originPopulation:
               operationId: controller.get_population
+              parameters:
                 stopId: $response.body#/stopIdOrigin
             destTemperature:
               operationId: controller.get_busstop_weather
@@ -145,6 +147,7 @@ paths:
                 stopId: $response.body#/stopIdDest
             destPopulation:
               operationId: controller.get_population
+              parameters:
                 stopId: $response.body#/stopIdDest
   /route/{busId}:
     parameters:

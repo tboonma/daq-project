@@ -66,10 +66,13 @@ type Bus2 {
 }
 
 type Busstop {
+  aqi: [BusstopWeather]
   busstopId: Int
   lat: Float
   lon: Float
   name: String
+  population: [PopulationDensity]
+  temperature: [BusstopWeather]
 }
 
 type BusstopWeather {
