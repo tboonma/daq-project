@@ -7,7 +7,6 @@ tmp
 htmlcov/*
 *.swp
 env/
-stub/
 *-sol.*
 ve
 venv/

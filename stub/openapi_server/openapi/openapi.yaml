@@ -1,0 +1,222 @@
+openapi: 3.0.0
+info:
+  description: To be added
+  title: KU Talai API
+  version: 1.0.0
+servers:
+- url: /talai-api/v1
+paths:
+  /bus/{stopIdOrigin}/{stopIdDest}:
+    get:
+      operationId: controller_get_takable_bus
+      parameters:
+      - explode: false
+        in: path
+        name: stopIdOrigin
+        required: true
+        schema:
+          type: integer
+        style: simple
+      - explode: false
+        in: path
+        name: stopIdDest
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: Success
+      summary: Returns list of takable bus from origin to destination
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /buses:
+    get:
+      operationId: controller_get_buses
+      responses:
+        "200":
+          description: Success
+      summary: Returns all KU Talai bus number
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /busstop/{stopId}:
+    get:
+      operationId: controller_get_busstop
+      parameters:
+      - explode: false
+        in: path
+        name: stopId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Busstop'
+          description: Success
+      summary: Returns complete details of the specified Talai bus stop
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /busstop/{stopId}/weather:
+    get:
+      operationId: controller_get_busstop_weather
+      parameters:
+      - explode: false
+        in: path
+        name: stopId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BusstopWeather'
+          description: Success
+      summary: Returns weather detail of the specified Talai bus stop
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /busstops:
+    get:
+      operationId: controller_get_busstops
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Busstop'
+                type: array
+          description: Success
+      summary: Returns list of Talai bus stops in KU
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /population/{stopId}:
+    get:
+      operationId: controller_get_population
+      parameters:
+      - explode: false
+        in: path
+        name: stopId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: Success
+      summary: Get population density in each KU Talai bus
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+    put:
+      operationId: controller_put_population
+      parameters:
+      - explode: false
+        in: path
+        name: stopId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: Success
+      summary: Increment people in KU Talai bus stop
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /route/{busId}:
+    get:
+      operationId: controller_get_bus_route
+      parameters:
+      - explode: false
+        in: path
+        name: busId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          description: Success
+      summary: Returns all bus stops for given route
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /routes:
+    get:
+      operationId: controller_get_routes
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Route'
+                type: array
+          description: Success
+      summary: Returns a list of routes of KU Talai bus
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+components:
+  schemas:
+    Busstop:
+      example:
+        busstopId: 0
+        name: name
+        lon: 1.4658129805029452
+        lat: 6.027456183070403
+      properties:
+        busstopId:
+          title: busstopId
+          type: integer
+        name:
+          title: name
+          type: string
+        lat:
+          title: lat
+          type: number
+        lon:
+          title: lon
+          type: number
+      title: Busstop
+      type: object
+    Route:
+      example:
+        routeNumber: 6
+        name: name
+        id: 0
+      properties:
+        id:
+          title: id
+          type: integer
+        routeNumber:
+          title: routeNumber
+          type: integer
+        name:
+          title: name
+          type: string
+      title: Route
+      type: object
+    Bus:
+      properties:
+        id:
+          type: object
+        bus_number:
+          type: integer
+        bus_stop_id:
+          type: integer
+        route_id:
+          type: integer
+      type: object
+    BusstopWeather:
+      example:
+        busstopId: 0
+        amount: 6.027456183070403
+        timestamp: timestamp
+      properties:
+        busstopId:
+          title: busstopId
+          type: integer
+        timestamp:
+          title: timestamp
+          type: string
+        amount:
+          title: amount
+          type: number
+      title: BusstopWeather
+      type: object
