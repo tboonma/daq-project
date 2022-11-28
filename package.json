@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "cd clientside && npm run build && cd .. && python app.py",
-    "gen-server": "openapi-generator-cli generate -i openapi/talai-api.yaml -g python-flask -o stub/"
+    "gen-server": "openapi-generator-cli generate -i openapi/talai-api.yaml -g python-flask -o stub/",
+    "gen-graphql": "openapi-generator-cli generate -i openapi/talai-api.yaml -g graphql-schema -o graphql/"
   },
   "repository": {
     "type": "git",
@@ -18,6 +19,7 @@
   },
   "homepage": "https://github.com/tboonma/daq-project#readme",
   "devDependencies": {
-    "@openapitools/openapi-generator-cli": "^2.5.2"
+    "@openapitools/openapi-generator-cli": "^2.5.2",
+    "swagger-to-graphql": "^4.0.2"
   }
 }
