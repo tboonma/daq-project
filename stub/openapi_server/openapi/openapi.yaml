@@ -55,7 +55,29 @@ paths:
           description: Success
       summary: Returns complete details of the specified Talai bus stop
       x-openapi-router-controller: openapi_server.controllers.default_controller
-  /busstop/{stopId}/weather/{sensor}:
+  /busstop/{stopId}/aqi:
+    get:
+      operationId: controller_get_busstop_aqi
+      parameters:
+      - explode: false
+        in: path
+        name: stopId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusstopWeather'
+                type: array
+          description: Success
+      summary: Returns PM2.5 detail of the specified Talai bus stop
+      x-openapi-router-controller: openapi_server.controllers.default_controller
+  /busstop/{stopId}/temperature:
     get:
       operationId: controller_get_busstop_weather
       parameters:
@@ -65,13 +87,6 @@ paths:
         required: true
         schema:
           type: integer
-        style: simple
-      - explode: false
-        in: path
-        name: sensor
-        required: true
-        schema:
-          type: string
         style: simple
       responses:
         "200":

@@ -6,7 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**controllerGetBusRoute**](DefaultApi.md#controllerGetBusRoute) | **GET** /route/{busId} | Returns all bus stops for given route
 [**controllerGetBusstop**](DefaultApi.md#controllerGetBusstop) | **GET** /busstop/{stopId} | Returns complete details of the specified Talai bus stop
-[**controllerGetBusstopWeather**](DefaultApi.md#controllerGetBusstopWeather) | **GET** /busstop/{stopId}/weather/{sensor} | Returns weather detail of the specified Talai bus stop
+[**controllerGetBusstopAqi**](DefaultApi.md#controllerGetBusstopAqi) | **GET** /busstop/{stopId}/aqi | Returns PM2.5 detail of the specified Talai bus stop
+[**controllerGetBusstopWeather**](DefaultApi.md#controllerGetBusstopWeather) | **GET** /busstop/{stopId}/temperature | Returns weather detail of the specified Talai bus stop
 [**controllerGetBusstops**](DefaultApi.md#controllerGetBusstops) | **GET** /busstops | Returns list of Talai bus stops in KU
 [**controllerGetPopulation**](DefaultApi.md#controllerGetPopulation) | **GET** /population/{stopId} | Get population density in each KU Talai bus
 [**controllerGetRoutes**](DefaultApi.md#controllerGetRoutes) | **GET** /routes | Returns a list of routes of KU Talai bus
@@ -101,11 +102,11 @@ No authorization required
 - **Accept**: application/json
 
 
-## controllerGetBusstopWeather
+## controllerGetBusstopAqi
 
-> [BusstopWeather] controllerGetBusstopWeather(stopId, sensor)
+> [BusstopWeather] controllerGetBusstopAqi(stopId)
 
-Returns weather detail of the specified Talai bus stop
+Returns PM2.5 detail of the specified Talai bus stop
 
 ### Example
 
@@ -114,8 +115,7 @@ import KuTalaiApi from 'ku_talai_api';
 
 let apiInstance = new KuTalaiApi.DefaultApi();
 let stopId = 56; // Number | 
-let sensor = "sensor_example"; // String | 
-apiInstance.controllerGetBusstopWeather(stopId, sensor, (error, data, response) => {
+apiInstance.controllerGetBusstopAqi(stopId, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -130,7 +130,49 @@ apiInstance.controllerGetBusstopWeather(stopId, sensor, (error, data, response) 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **stopId** | **Number**|  | 
- **sensor** | **String**|  | 
+
+### Return type
+
+[**[BusstopWeather]**](BusstopWeather.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## controllerGetBusstopWeather
+
+> [BusstopWeather] controllerGetBusstopWeather(stopId)
+
+Returns weather detail of the specified Talai bus stop
+
+### Example
+
+```javascript
+import KuTalaiApi from 'ku_talai_api';
+
+let apiInstance = new KuTalaiApi.DefaultApi();
+let stopId = 56; // Number | 
+apiInstance.controllerGetBusstopWeather(stopId, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **stopId** | **Number**|  | 
 
 ### Return type
 

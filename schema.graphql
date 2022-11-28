@@ -21,11 +21,18 @@ type Query {
   busstop(stopId: Int!): Busstop
 
   """
+  Returns PM2.5 detail of the specified Talai bus stop
+  
+  Equivalent to GET /busstop/{stopId}/aqi
+  """
+  busstopAqi(stopId: Int!): [BusstopWeather]
+
+  """
   Returns weather detail of the specified Talai bus stop
   
-  Equivalent to GET /busstop/{stopId}/weather/{sensor}
+  Equivalent to GET /busstop/{stopId}/temperature
   """
-  busstopWeather(sensor: String!, stopId: Int!): [BusstopWeather2]
+  busstopTemperature(stopId: Int!): [BusstopWeather]
 
   """
   Returns list of Talai bus stops in KU
@@ -65,7 +72,7 @@ type Busstop {
   name: String
 }
 
-type BusstopWeather2 {
+type BusstopWeather {
   amount: Float
   busstopId: Int
   sensor: String

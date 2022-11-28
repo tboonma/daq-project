@@ -123,34 +123,28 @@ export default class DefaultApi {
     }
 
     /**
-     * Callback function to receive the result of the controllerGetBusstopWeather operation.
-     * @callback module:api/DefaultApi~controllerGetBusstopWeatherCallback
+     * Callback function to receive the result of the controllerGetBusstopAqi operation.
+     * @callback module:api/DefaultApi~controllerGetBusstopAqiCallback
      * @param {String} error Error message, if any.
      * @param {Array.<module:model/BusstopWeather>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
     /**
-     * Returns weather detail of the specified Talai bus stop
+     * Returns PM2.5 detail of the specified Talai bus stop
      * @param {Number} stopId 
-     * @param {String} sensor 
-     * @param {module:api/DefaultApi~controllerGetBusstopWeatherCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:api/DefaultApi~controllerGetBusstopAqiCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/BusstopWeather>}
      */
-    controllerGetBusstopWeather(stopId, sensor, callback) {
+    controllerGetBusstopAqi(stopId, callback) {
       let postBody = null;
       // verify the required parameter 'stopId' is set
       if (stopId === undefined || stopId === null) {
-        throw new Error("Missing the required parameter 'stopId' when calling controllerGetBusstopWeather");
-      }
-      // verify the required parameter 'sensor' is set
-      if (sensor === undefined || sensor === null) {
-        throw new Error("Missing the required parameter 'sensor' when calling controllerGetBusstopWeather");
+        throw new Error("Missing the required parameter 'stopId' when calling controllerGetBusstopAqi");
       }
 
       let pathParams = {
-        'stopId': stopId,
-        'sensor': sensor
+        'stopId': stopId
       };
       let queryParams = {
       };
@@ -164,7 +158,49 @@ export default class DefaultApi {
       let accepts = ['application/json'];
       let returnType = [BusstopWeather];
       return this.apiClient.callApi(
-        '/busstop/{stopId}/weather/{sensor}', 'GET',
+        '/busstop/{stopId}/aqi', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
+     * Callback function to receive the result of the controllerGetBusstopWeather operation.
+     * @callback module:api/DefaultApi~controllerGetBusstopWeatherCallback
+     * @param {String} error Error message, if any.
+     * @param {Array.<module:model/BusstopWeather>} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Returns weather detail of the specified Talai bus stop
+     * @param {Number} stopId 
+     * @param {module:api/DefaultApi~controllerGetBusstopWeatherCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<module:model/BusstopWeather>}
+     */
+    controllerGetBusstopWeather(stopId, callback) {
+      let postBody = null;
+      // verify the required parameter 'stopId' is set
+      if (stopId === undefined || stopId === null) {
+        throw new Error("Missing the required parameter 'stopId' when calling controllerGetBusstopWeather");
+      }
+
+      let pathParams = {
+        'stopId': stopId
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = [];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [BusstopWeather];
+      return this.apiClient.callApi(
+        '/busstop/{stopId}/temperature', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

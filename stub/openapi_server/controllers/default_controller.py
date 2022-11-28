@@ -38,15 +38,26 @@ def controller_get_busstop(stop_id):  # noqa: E501
     return 'do some magic!'
 
 
-def controller_get_busstop_weather(stop_id, sensor):  # noqa: E501
+def controller_get_busstop_aqi(stop_id):  # noqa: E501
+    """Returns PM2.5 detail of the specified Talai bus stop
+
+     # noqa: E501
+
+    :param stop_id: 
+    :type stop_id: int
+
+    :rtype: Union[List[BusstopWeather], Tuple[List[BusstopWeather], int], Tuple[List[BusstopWeather], int, Dict[str, str]]
+    """
+    return 'do some magic!'
+
+
+def controller_get_busstop_weather(stop_id):  # noqa: E501
     """Returns weather detail of the specified Talai bus stop
 
      # noqa: E501
 
     :param stop_id: 
     :type stop_id: int
-    :param sensor: 
-    :type sensor: str
 
     :rtype: Union[List[BusstopWeather], Tuple[List[BusstopWeather], int], Tuple[List[BusstopWeather], int, Dict[str, str]]
     """

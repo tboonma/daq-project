@@ -59,14 +59,8 @@ function App() {
     setAqiBusstop(event.target.value)
   }
 
-  const createWeatherChart = async (sensorBusstop, sensor) => {
+  const createWeatherChart = async (sensorBusstop) => {
     if (sensorBusstop === undefined || sensorBusstop === '') return
-    console.log(`{
-      busstopWeather(stopId: ${sensorBusstop.busstopId}, sensor: "${sensor}") {
-        amount,
-        timestamp
-      }
-    }`)
     const resp = await fetch('http://localhost:3300/graphql', {
       method: 'POST',
       headers: {
@@ -76,7 +70,30 @@ function App() {
       body: JSON.stringify({
         query: `
         {
-          busstopWeather(stopId: ${sensorBusstop.busstopId}, sensor: "${sensor}") {
+          busstopTemperature(stopId: ${sensorBusstop.busstopId}) {
+            amount,
+            timestamp
+          }
+        }`
+      })
+    })
+    var json = await resp.json()
+    var table = json.data
+    return table
+  }
+
+  const createAqiChart = async (sensorBusstop) => {
+    if (sensorBusstop === undefined || sensorBusstop === '') return
+    const resp = await fetch('http://localhost:3300/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        query: `
+        {
+          busstopAqi(stopId: ${sensorBusstop.busstopId}) {
             amount,
             timestamp
           }
@@ -138,9 +155,7 @@ function App() {
   }
 
   useEffect(() => {
-    createWeatherChart(aqiBusstop, 'pm25').then((val) =>
-      setAqiData(val.busstopWeather)
-    )
+    createAqiChart(aqiBusstop).then((val) => setAqiData(val.busstopAqi))
   }, [aqiBusstop])
 
   useEffect(() => {
@@ -148,8 +163,8 @@ function App() {
   }, [populationBusstop])
 
   useEffect(() => {
-    createWeatherChart(weatherBusstop, 'temperature').then((val) => {
-      setWeatherData(val.busstopWeather)
+    createWeatherChart(weatherBusstop).then((val) => {
+      setWeatherData(val.busstopTemperature)
     })
   }, [weatherBusstop])
 
