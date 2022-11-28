@@ -8,6 +8,7 @@ import sys
 from time import sleep
 from dotenv import load_dotenv
 from datetime import datetime, timezone, timedelta
+import random
 
 th_timezone = timezone(timedelta(hours=7))
 load_dotenv()
@@ -86,6 +87,31 @@ def iqair():
                 conn.commit()
             print(f"[IQAir] {result.name} weather data inserted...")
             sleep(20)
+
+def generate_population():
+    print("[Population] Getting all busstop...")
+    results = get_busstops()
+    if results:
+        for result in results:
+            has_people = random.choice([True, False])
+            if not has_people:
+                continue
+            print(f"[Population] Generating population for {result.name}...")
+            people = random.randint(1, 5)
+            print(f"[Population] Inserting {people} population for {result.name}...")
+            for _ in range(people):
+                with pool.connection() as conn, conn.cursor() as cs:
+                    cs.execute("""
+                        INSERT INTO population (ts, bus_stop_id)
+                        VALUES (
+                            %s, %s
+                        )
+                    """, [
+                        datetime.now(th_timezone),
+                        result.busstop_id
+                    ])
+                    conn.commit()
+            print(f"[Population] {result.name} population inserted...")
 
 
 if __name__ == '__main__':
