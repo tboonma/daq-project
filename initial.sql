@@ -47,3 +47,12 @@ CREATE TABLE IF NOT EXISTS iqair (
   PRIMARY KEY (`id`),
   FOREIGN KEY (bus_stop_id) REFERENCES bus_stop(bus_stop_id)
 );
+
+--create population table
+CREATE TABLE IF NOT EXISTS `population` (
+  id INT NOT NULL AUTO_INCREMENT,
+  ts TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  bus_stop_id INT NOT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (bus_stop_id) REFERENCES bus_stop(bus_stop_id)
+);

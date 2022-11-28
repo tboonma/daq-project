@@ -7,6 +7,9 @@ import os
 import sys
 from time import sleep
 from dotenv import load_dotenv
+from datetime import datetime, timezone, timedelta
+
+th_timezone = timezone(timedelta(hours=7))
 load_dotenv()
 
 pool = PooledDB(creator=pymysql,
@@ -28,11 +31,11 @@ def weather_open_meteo():
             print(f"[Open-Meteo] Inserting weather data for {result.name}...")
             with pool.connection() as conn, conn.cursor() as cs:
                 cs.execute("""
-                    INSERT INTO open_meteo (bus_stop_id, temperature, windspeed)
+                    INSERT INTO open_meteo (ts, bus_stop_id, temperature, windspeed)
                     VALUES (
-                        %s, %s, %s
+                        %s, %s, %s, %s
                     )
-                """, [result.busstop_id, data['current_weather']['temperature'], data['current_weather']['windspeed']])
+                """, [datetime.now(th_timezone), result.busstop_id, data['current_weather']['temperature'], data['current_weather']['windspeed']])
                 conn.commit()
             print(f"[Open-Meteo] {result.name} weather data inserted...")
 
@@ -48,11 +51,11 @@ def pm25_aqicn():
             print(f"[AQICN] Inserting weather data for {result.name}...")
             with pool.connection() as conn, conn.cursor() as cs:
                 cs.execute("""
-                    INSERT INTO aqi (bus_stop_id, value)
+                    INSERT INTO aqi (ts, bus_stop_id, value)
                     VALUES (
-                        %s, %s
+                        %s, %s, %s
                     )
-                """, [result.busstop_id, data['data']['aqi']])
+                """, [datetime.now(th_timezone), result.busstop_id, data['data']['aqi']])
                 conn.commit()
             print(f"[AQICN] {result.name} weather data inserted...")
 
@@ -68,11 +71,12 @@ def iqair():
             print(f"[IQAir] Inserting weather data for {result.name}...")
             with pool.connection() as conn, conn.cursor() as cs:
                 cs.execute("""
-                    INSERT INTO iqair (bus_stop_id, temperature, humidity, wind_speed, pm25_value)
+                    INSERT INTO iqair (ts, bus_stop_id, temperature, humidity, wind_speed, pm25_value)
                     VALUES (
-                        %s, %s, %s, %s, %s
+                        %s, %s, %s, %s, %s, %s
                     )
                 """, [
+                    datetime.now(th_timezone),
                     result.busstop_id,
                     data['data']['current']['weather']['tp'],
                     data['data']['current']['weather']['hu'],
