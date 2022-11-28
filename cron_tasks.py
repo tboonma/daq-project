@@ -89,6 +89,8 @@ def iqair():
             sleep(20)
 
 def generate_population():
+    if datetime.now(th_timezone).hour >= 17 or datetime.now(th_timezone).hour <= 7:
+        sys.exit(0)
     print("[Population] Getting all busstop...")
     results = get_busstops()
     if results:
