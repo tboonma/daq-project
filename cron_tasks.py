@@ -124,19 +124,36 @@ def integrate_data():
             WHERE `ts` > NOW() - INTERVAL 2 HOUR
             GROUP BY bus_stop_id
         """)
-        insert_query = """
-            INSERT into weather (bus_stop_id, ts, sensor, source, value)
-            VALUES
-        """
         for data in cs.fetchall():
             busstop_id, temperature, pm25, humidity, wind_speed = data
-            insert_query += f" ({busstop_id}, '{datetime.now(th_timezone)}', 'temperature', 'iqair', {temperature}),"
-            insert_query += f" ({busstop_id}, '{datetime.now(th_timezone)}', 'pm25', 'iqair', {pm25}),"
-            insert_query += f" ({busstop_id}, '{datetime.now(th_timezone)}', 'humidity', 'iqair', {humidity}),"
-            insert_query += f" ({busstop_id}, '{datetime.now(th_timezone)}', 'windspeed', 'iqair', {wind_speed}),"
-        query = insert_query[:-1] + ";"
-        cs.execute(query)
-        conn.commit()
+            cs.execute("""
+                INSERT into weather (bus_stop_id, ts, sensor, source, value)
+                VALUES (
+                    %s, %s, 'temperature', 'iqair', %s
+                )
+            """, [busstop_id, datetime.now(th_timezone), temperature])
+            conn.commit()
+            cs.execute("""
+                INSERT into weather (bus_stop_id, ts, sensor, source, value)
+                VALUES (
+                    %s, %s, 'pm25', 'iqair', %s
+                )
+            """, [busstop_id, datetime.now(th_timezone), pm25])
+            conn.commit()
+            cs.execute("""
+                INSERT into weather (bus_stop_id, ts, sensor, source, value)
+                VALUES (
+                    %s, %s, 'humidity', 'iqair', %s
+                )
+            """, [busstop_id, datetime.now(th_timezone), humidity])
+            conn.commit()
+            cs.execute("""
+                INSERT into weather (bus_stop_id, ts, sensor, source, value)
+                VALUES (
+                    %s, %s, 'windspeed', 'iqair', %s
+                )
+            """, [busstop_id, datetime.now(th_timezone), wind_speed])
+            conn.commit()
     print("[Integrate] Getting AQICN weather information...")
     with pool.connection() as conn, conn.cursor() as cs:
         cs.execute("""
@@ -145,16 +162,15 @@ def integrate_data():
             WHERE `ts` > NOW() - INTERVAL 2 HOUR
             GROUP BY bus_stop_id
         """)
-        insert_query = """
-            INSERT into weather (bus_stop_id, ts, sensor, source, value)
-            VALUES
-        """
         for data in cs.fetchall():
             busstop_id, pm25 = data
-            insert_query += f" ({busstop_id}, '{datetime.now(th_timezone)}', 'pm25', 'aqi', {pm25}),"
-        query = insert_query[:-1] + ";"
-        cs.execute(query)
-        conn.commit()
+            cs.execute("""
+                INSERT into weather (bus_stop_id, ts, sensor, source, value)
+                VALUES (
+                    %s, %s, 'pm25', 'aqi', %s
+                )
+            """, [busstop_id, datetime.now(th_timezone), pm25])
+            conn.commit()
     print("[Integrate] Getting Open Meteo weather information...")
     with pool.connection() as conn, conn.cursor() as cs:
         cs.execute("""
@@ -165,11 +181,20 @@ def integrate_data():
         """)
         for data in cs.fetchall():
             busstop_id, temperature, wind_speed = data
-            insert_query += f" ({busstop_id}, '{datetime.now(th_timezone)}', 'temperature', 'open_meteo', {temperature}),"
-            insert_query += f" ({busstop_id}, '{datetime.now(th_timezone)}', 'windspeed', 'open_meteo', {wind_speed}),"
-        query = insert_query[:-1] + ";"
-        cs.execute(query)
-        conn.commit()
+            cs.execute("""
+                INSERT into weather (bus_stop_id, ts, sensor, source, value)
+                VALUES (
+                    %s, %s, 'temperature', 'open_meteo', %s
+                )
+            """, [busstop_id, datetime.now(th_timezone), temperature])
+            conn.commit()
+            cs.execute("""
+                INSERT into weather (bus_stop_id, ts, sensor, source, value)
+                VALUES (
+                    %s, %s, 'windspeed', 'open_meteo', %s
+                )
+            """, [busstop_id, datetime.now(th_timezone), wind_speed])
+            conn.commit()
 
 
 if __name__ == '__main__':
