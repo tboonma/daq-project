@@ -44,7 +44,21 @@ def get_busstop(stop_id):
             return models.Busstop(*result)
 
 def get_busstop_weather(stop_id):
-    return "Doing something"
+    with pool.connection() as conn, conn.cursor() as cs:
+        cs.execute("""
+            SELECT sensor, value
+            FROM (
+                SELECT b.bus_stop_id, b.bus_stop_name, sensor, value
+                FROM weather w
+                INNER JOIN bus_stop b ON w.bus_stop_id = b.bus_stop_id
+                WHERE bus_stop_id=%s
+                GROUP BY w.bus_stop_id
+                )
+            GROUP BY sensor
+        """, [stop_id])
+        result = cs.fetchone()
+        if result:
+            return models.BusstopWeather(*result)
 
 def get_routes():
     return "Doing something"
