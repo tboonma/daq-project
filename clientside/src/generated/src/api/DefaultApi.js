@@ -126,25 +126,31 @@ export default class DefaultApi {
      * Callback function to receive the result of the controllerGetBusstopWeather operation.
      * @callback module:api/DefaultApi~controllerGetBusstopWeatherCallback
      * @param {String} error Error message, if any.
-     * @param {module:model/BusstopWeather} data The data returned by the service call.
+     * @param {Array.<module:model/BusstopWeather>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
     /**
      * Returns weather detail of the specified Talai bus stop
      * @param {Number} stopId 
+     * @param {String} sensor 
      * @param {module:api/DefaultApi~controllerGetBusstopWeatherCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/BusstopWeather}
+     * data is of type: {@link Array.<module:model/BusstopWeather>}
      */
-    controllerGetBusstopWeather(stopId, callback) {
+    controllerGetBusstopWeather(stopId, sensor, callback) {
       let postBody = null;
       // verify the required parameter 'stopId' is set
       if (stopId === undefined || stopId === null) {
         throw new Error("Missing the required parameter 'stopId' when calling controllerGetBusstopWeather");
       }
+      // verify the required parameter 'sensor' is set
+      if (sensor === undefined || sensor === null) {
+        throw new Error("Missing the required parameter 'sensor' when calling controllerGetBusstopWeather");
+      }
 
       let pathParams = {
-        'stopId': stopId
+        'stopId': stopId,
+        'sensor': sensor
       };
       let queryParams = {
       };
@@ -156,9 +162,9 @@ export default class DefaultApi {
       let authNames = [];
       let contentTypes = [];
       let accepts = ['application/json'];
-      let returnType = BusstopWeather;
+      let returnType = [BusstopWeather];
       return this.apiClient.callApi(
-        '/busstop/{stopId}/weather', 'GET',
+        '/busstop/{stopId}/weather/{sensor}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
@@ -282,7 +288,7 @@ export default class DefaultApi {
      * Callback function to receive the result of the controllerGetTakableBus operation.
      * @callback module:api/DefaultApi~controllerGetTakableBusCallback
      * @param {String} error Error message, if any.
-     * @param {Array.<Number>} data The data returned by the service call.
+     * @param {Array.<module:model/Route>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -291,7 +297,7 @@ export default class DefaultApi {
      * @param {Number} stopIdOrigin 
      * @param {Number} stopIdDest 
      * @param {module:api/DefaultApi~controllerGetTakableBusCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link Array.<Number>}
+     * data is of type: {@link Array.<module:model/Route>}
      */
     controllerGetTakableBus(stopIdOrigin, stopIdDest, callback) {
       let postBody = null;
@@ -318,7 +324,7 @@ export default class DefaultApi {
       let authNames = [];
       let contentTypes = [];
       let accepts = ['application/json'];
-      let returnType = ['Number'];
+      let returnType = [Route];
       return this.apiClient.callApi(
         '/bus/{stopIdOrigin}/{stopIdDest}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,

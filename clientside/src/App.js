@@ -9,12 +9,22 @@ import Button from '@mui/material/Button'
 import React, { useState, useEffect } from 'react'
 import DefaultApi from './generated/src/api/DefaultApi'
 import ApiClient from './generated/src/ApiClient'
+import CustomLineChart from './components/CustomLineChart'
+import CustomBarChart from './components/CustomBarChart'
 
 function App() {
   const [origin, setOrigin] = useState('')
   const [destination, setDestination] = useState('')
   const [busstops, setBusstops] = useState([])
+  const [weatherBusstop, setWeatherBusstop] = useState('')
   const [displayInsertButton, setInsertButton] = useState(false)
+  const [weatherData, setWeatherData] = useState('')
+  const [populationData, setPopulationData] = useState('')
+  const [populationBusstop, setPopulationBusstop] = useState('')
+  const [aqiBusstop, setAqiBusstop] = useState('')
+  const [aqiData, setAqiData] = useState('')
+  const [takableBus, setTakableBus] = useState('')
+
   let api = undefined
   if (window.location.href.includes('localhost')) {
     api = new DefaultApi()
@@ -34,6 +44,115 @@ function App() {
     setInsertButton(true)
   }
 
+  const changeWeatherHandler = (event) => {
+    event.preventDefault()
+    setWeatherBusstop(event.target.value)
+  }
+
+  const changePopulationHandler = (event) => {
+    event.preventDefault()
+    setPopulationBusstop(event.target.value)
+  }
+
+  const changeAqiHandler = (event) => {
+    event.preventDefault()
+    setAqiBusstop(event.target.value)
+  }
+
+  const createWeatherChart = async (sensorBusstop, sensor) => {
+    if (sensorBusstop === undefined || sensorBusstop === '') return
+    console.log(`{
+      busstopWeather(stopId: ${sensorBusstop.busstopId}, sensor: "${sensor}") {
+        amount,
+        timestamp
+      }
+    }`)
+    const resp = await fetch('http://localhost:3300/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        query: `
+        {
+          busstopWeather(stopId: ${sensorBusstop.busstopId}, sensor: "${sensor}") {
+            amount,
+            timestamp
+          }
+        }`
+      })
+    })
+    var json = await resp.json()
+    var table = json.data
+    return table
+  }
+
+  const createPopulationChart = async () => {
+    if (populationBusstop === undefined || populationBusstop === '') return
+    const resp = await fetch('http://localhost:3300/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        query: `
+        {
+          population(stopId: ${populationBusstop.busstopId}) {
+            timestamp,
+            amount
+          }
+        }`
+      })
+    })
+    var json = await resp.json()
+    var table = json.data
+    setPopulationData(table.population)
+  }
+
+  const findBus = async (event) => {
+    event.preventDefault()
+    const resp = await fetch('http://localhost:3300/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        query: `
+        {
+          bus(stopIdOrigin: ${origin.busstopId}, stopIdDest: ${destination.busstopId}) {
+            routeNumber
+          }
+        }`
+      })
+    })
+    var json = await resp.json()
+    var table = json.data
+    console.log(table.bus)
+    let availableBus = ''
+    table.bus.forEach((bus) => (availableBus += bus.routeNumber + ', '))
+    if (availableBus === '') availableBus = 'Cannot take only 1 bus to go there'
+    setTakableBus(availableBus.slice(0, -2))
+  }
+
+  useEffect(() => {
+    createWeatherChart(aqiBusstop, 'pm25').then((val) =>
+      setAqiData(val.busstopWeather)
+    )
+  }, [aqiBusstop])
+
+  useEffect(() => {
+    createPopulationChart()
+  }, [populationBusstop])
+
+  useEffect(() => {
+    createWeatherChart(weatherBusstop, 'temperature').then((val) => {
+      setWeatherData(val.busstopWeather)
+    })
+  }, [weatherBusstop])
+
   useEffect(() => {
     api.controllerGetBusstops((err, data, res) => {
       setBusstops(data)
@@ -49,7 +168,7 @@ function App() {
         crossOrigin=""
       />
       <Navbar />
-      <div className="pt-10 md:pt-20 md:px-14 md:flex md:space-x-3">
+      <div className="py-6 md:pt-20 md:px-14 md:flex md:space-x-3">
         <div className="h-[60vh] w-[100vw] md:w-[65vw]">
           <MapContainer
             center={[13.848584, 100.571825]}
@@ -117,8 +236,89 @@ function App() {
                 ))}
               </Select>
             </FormControl>
+            {origin !== '' && destination !== '' && (
+              <Button variant="contained" onClick={findBus}>
+                {'FIND BUS'}
+              </Button>
+            )}
+            <p>Take bus number: </p>
+            {takableBus}
           </div>
         </div>
+      </div>
+      <div className="py-6 md:px-14 text-center md:text-left space-y-3">
+        <div className="text-xl font-semibold">Temperature history</div>
+        <FormControl className="w-2/6" size="small">
+          <InputLabel id="demo-select-small">Location</InputLabel>
+          <Select
+            labelId="demo-select-small"
+            id="demo-select-small"
+            value={weatherBusstop}
+            label="location"
+            onChange={changeWeatherHandler}
+          >
+            {busstops.map((busstop) => (
+              <MenuItem key={busstop.busstopId} value={busstop}>
+                {busstop.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        {weatherData !== '' && (
+          <CustomLineChart
+            data={weatherData}
+            xName="timestamp"
+            yName="amount"
+          />
+        )}
+      </div>
+      <div className="py-6 md:px-14 text-center md:text-left space-y-3">
+        <div className="text-xl font-semibold">Population Density</div>
+        <FormControl className="w-2/6" size="small">
+          <InputLabel id="demo-select-small">Location</InputLabel>
+          <Select
+            labelId="demo-select-small"
+            id="demo-select-small"
+            value={populationBusstop}
+            label="location"
+            onChange={changePopulationHandler}
+          >
+            {busstops.map((busstop) => (
+              <MenuItem key={busstop.busstopId} value={busstop}>
+                {busstop.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        {populationData !== '' && (
+          <CustomBarChart
+            data={populationData}
+            xName="timestamp"
+            yName="amount"
+          />
+        )}
+      </div>
+      <div className="py-6 md:px-14 text-center md:text-left space-y-3">
+        <div className="text-xl font-semibold">PM2.5 History</div>
+        <FormControl className="w-2/6" size="small">
+          <InputLabel id="demo-select-small">Location</InputLabel>
+          <Select
+            labelId="demo-select-small"
+            id="demo-select-small"
+            value={aqiBusstop}
+            label="location"
+            onChange={changeAqiHandler}
+          >
+            {busstops.map((busstop) => (
+              <MenuItem key={busstop.busstopId} value={busstop}>
+                {busstop.name}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        {aqiData !== '' && (
+          <CustomLineChart data={aqiData} xName="timestamp" yName="amount" />
+        )}
       </div>
     </div>
   )

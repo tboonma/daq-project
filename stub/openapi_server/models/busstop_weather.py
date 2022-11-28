@@ -15,7 +15,7 @@ class BusstopWeather(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, busstop_id=None, timestamp=None, amount=None):  # noqa: E501
+    def __init__(self, busstop_id=None, timestamp=None, amount=None, sensor=None):  # noqa: E501
         """BusstopWeather - a model defined in OpenAPI
 
         :param busstop_id: The busstop_id of this BusstopWeather.  # noqa: E501
@@ -24,22 +24,27 @@ class BusstopWeather(Model):
         :type timestamp: str
         :param amount: The amount of this BusstopWeather.  # noqa: E501
         :type amount: float
+        :param sensor: The sensor of this BusstopWeather.  # noqa: E501
+        :type sensor: str
         """
         self.openapi_types = {
             'busstop_id': int,
             'timestamp': str,
-            'amount': float
+            'amount': float,
+            'sensor': str
         }
 
         self.attribute_map = {
             'busstop_id': 'busstopId',
             'timestamp': 'timestamp',
-            'amount': 'amount'
+            'amount': 'amount',
+            'sensor': 'sensor'
         }
 
         self._busstop_id = busstop_id
         self._timestamp = timestamp
         self._amount = amount
+        self._sensor = sensor
 
     @classmethod
     def from_dict(cls, dikt) -> 'BusstopWeather':
@@ -114,3 +119,24 @@ class BusstopWeather(Model):
         """
 
         self._amount = amount
+
+    @property
+    def sensor(self):
+        """Gets the sensor of this BusstopWeather.
+
+
+        :return: The sensor of this BusstopWeather.
+        :rtype: str
+        """
+        return self._sensor
+
+    @sensor.setter
+    def sensor(self, sensor):
+        """Sets the sensor of this BusstopWeather.
+
+
+        :param sensor: The sensor of this BusstopWeather.
+        :type sensor: str
+        """
+
+        self._sensor = sensor

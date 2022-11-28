@@ -6,7 +6,7 @@
   "scripts": {
     "start": "cd clientside && npm run build && cd .. && python app.py",
     "gen-server": "openapi-generator-cli generate -i openapi/talai-api.yaml -g python-flask -o stub/",
-    "gen-graphql": "openapi-generator-cli generate -i openapi/talai-api.yaml -g graphql-schema -o graphql/"
+    "gen-graphql": "openapi-to-graphql openapi/talai-api.yaml --save schema.graphql"
   },
   "repository": {
     "type": "git",

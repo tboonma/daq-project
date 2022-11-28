@@ -18,14 +18,22 @@ sys.path.append(OPENAPI_STUB_DIR)
 
 try:
     import connexion
-    from flask import render_template
+    from flask import render_template, request, jsonify
     from flask_cors import CORS
+    from ariadne import load_schema_from_path, make_executable_schema, \
+    graphql_sync, snake_case_fallback_resolvers, ObjectType
+    from ariadne.constants import PLAYGROUND_HTML
 except ModuleNotFoundError:
     print("Please install all required packages by running:"
           " pip install -r requirements.txt")
     sys.exit(1)
 
 from openapi_server import encoder
+
+type_defs = load_schema_from_path("schema.graphql")
+schema = make_executable_schema(
+    type_defs, snake_case_fallback_resolvers
+)
 
 app = connexion.FlaskApp(__name__, specification_dir='./', server_args={'static_folder': './clientside/build/static', 'template_folder': './clientside/build'})
 flask_app = app.app
@@ -42,3 +50,19 @@ def serve(path):
         return render_template(flask_app.static_folder + '/' + path)
     else:
         return render_template('index.html')
+
+@app.route("/graphql", methods=["GET"])
+def graphql_playground():
+    return PLAYGROUND_HTML, 200
+
+@app.route("/graphql", methods=["POST"])
+def graphql_server():
+    data = request.get_json()
+    success, result = graphql_sync(
+        schema,
+        data,
+        context_value=request,
+        debug=app.debug
+    )
+    status_code = 200 if success else 400
+    return jsonify(result), status_code

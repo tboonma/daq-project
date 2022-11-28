@@ -30,7 +30,7 @@ paths:
             application/json:
               schema:
                 items:
-                  type: integer
+                  $ref: '#/components/schemas/Route'
                 type: array
           description: Success
       summary: Returns list of takable bus from origin to destination
@@ -55,7 +55,7 @@ paths:
           description: Success
       summary: Returns complete details of the specified Talai bus stop
       x-openapi-router-controller: openapi_server.controllers.default_controller
-  /busstop/{stopId}/weather:
+  /busstop/{stopId}/weather/{sensor}:
     get:
       operationId: controller_get_busstop_weather
       parameters:
@@ -66,12 +66,21 @@ paths:
         schema:
           type: integer
         style: simple
+      - explode: false
+        in: path
+        name: sensor
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/BusstopWeather'
+                items:
+                  $ref: '#/components/schemas/BusstopWeather'
+                type: array
           description: Success
       summary: Returns weather detail of the specified Talai bus stop
       x-openapi-router-controller: openapi_server.controllers.default_controller
@@ -217,6 +226,7 @@ components:
       example:
         busstopId: 0
         amount: 6.027456183070403
+        sensor: sensor
         timestamp: timestamp
       properties:
         busstopId:
@@ -228,6 +238,9 @@ components:
         amount:
           title: amount
           type: number
+        sensor:
+          title: sensor
+          type: string
       title: BusstopWeather
       type: object
     PopulationDensity:

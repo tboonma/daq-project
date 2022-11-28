@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**controllerGetBusRoute**](DefaultApi.md#controllerGetBusRoute) | **GET** /route/{busId} | Returns all bus stops for given route
 [**controllerGetBusstop**](DefaultApi.md#controllerGetBusstop) | **GET** /busstop/{stopId} | Returns complete details of the specified Talai bus stop
-[**controllerGetBusstopWeather**](DefaultApi.md#controllerGetBusstopWeather) | **GET** /busstop/{stopId}/weather | Returns weather detail of the specified Talai bus stop
+[**controllerGetBusstopWeather**](DefaultApi.md#controllerGetBusstopWeather) | **GET** /busstop/{stopId}/weather/{sensor} | Returns weather detail of the specified Talai bus stop
 [**controllerGetBusstops**](DefaultApi.md#controllerGetBusstops) | **GET** /busstops | Returns list of Talai bus stops in KU
 [**controllerGetPopulation**](DefaultApi.md#controllerGetPopulation) | **GET** /population/{stopId} | Get population density in each KU Talai bus
 [**controllerGetRoutes**](DefaultApi.md#controllerGetRoutes) | **GET** /routes | Returns a list of routes of KU Talai bus
@@ -103,7 +103,7 @@ No authorization required
 
 ## controllerGetBusstopWeather
 
-> BusstopWeather controllerGetBusstopWeather(stopId)
+> [BusstopWeather] controllerGetBusstopWeather(stopId, sensor)
 
 Returns weather detail of the specified Talai bus stop
 
@@ -114,7 +114,8 @@ import KuTalaiApi from 'ku_talai_api';
 
 let apiInstance = new KuTalaiApi.DefaultApi();
 let stopId = 56; // Number | 
-apiInstance.controllerGetBusstopWeather(stopId, (error, data, response) => {
+let sensor = "sensor_example"; // String | 
+apiInstance.controllerGetBusstopWeather(stopId, sensor, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -129,10 +130,11 @@ apiInstance.controllerGetBusstopWeather(stopId, (error, data, response) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **stopId** | **Number**|  | 
+ **sensor** | **String**|  | 
 
 ### Return type
 
-[**BusstopWeather**](BusstopWeather.md)
+[**[BusstopWeather]**](BusstopWeather.md)
 
 ### Authorization
 
@@ -267,7 +269,7 @@ No authorization required
 
 ## controllerGetTakableBus
 
-> [Number] controllerGetTakableBus(stopIdOrigin, stopIdDest)
+> [Route] controllerGetTakableBus(stopIdOrigin, stopIdDest)
 
 Returns list of takable bus from origin to destination
 
@@ -298,7 +300,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**[Number]**
+[**[Route]**](Route.md)
 
 ### Authorization
 

@@ -56,6 +56,9 @@ class BusstopWeather {
             if (data.hasOwnProperty('amount')) {
                 obj['amount'] = ApiClient.convertToType(data['amount'], 'Number');
             }
+            if (data.hasOwnProperty('sensor')) {
+                obj['sensor'] = ApiClient.convertToType(data['sensor'], 'String');
+            }
         }
         return obj;
     }
@@ -69,6 +72,10 @@ class BusstopWeather {
         // ensure the json data is a string
         if (data['timestamp'] && !(typeof data['timestamp'] === 'string' || data['timestamp'] instanceof String)) {
             throw new Error("Expected the field `timestamp` to be a primitive type in the JSON string but got " + data['timestamp']);
+        }
+        // ensure the json data is a string
+        if (data['sensor'] && !(typeof data['sensor'] === 'string' || data['sensor'] instanceof String)) {
+            throw new Error("Expected the field `sensor` to be a primitive type in the JSON string but got " + data['sensor']);
         }
 
         return true;
@@ -93,6 +100,11 @@ BusstopWeather.prototype['timestamp'] = undefined;
  * @member {Number} amount
  */
 BusstopWeather.prototype['amount'] = undefined;
+
+/**
+ * @member {String} sensor
+ */
+BusstopWeather.prototype['sensor'] = undefined;
 
 
 

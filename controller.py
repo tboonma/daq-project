@@ -43,15 +43,16 @@ def get_busstop(stop_id):
         if result:
             return models.Busstop(*result)
 
-def get_busstop_weather(stop_id):
+def get_busstop_weather(stop_id, sensor):
     logging.info("Connecting to database...")
     with pool.connection() as conn, conn.cursor() as cs:
         logging.info("Executing query...")
         cs.execute("""
-            SELECT  bus_stop_id,ts,value
-                FROM weather 
-                WHERE bus_stop_id=%s
-        """, [stop_id])
+            SELECT bus_stop_id, TIMESTAMP(DATE(ts), (HOUR(ts)*10000) + ((MINUTE(ts) DIV 30)*30*100)) AS d, AVG(value), sensor
+            FROM weather 
+            WHERE bus_stop_id=%s AND sensor=%s
+            GROUP BY d
+        """, [stop_id, sensor])
         logging.info("Returning result...")
         result = [models.BusstopWeather(*row) for row in cs.fetchall()]
         return result
@@ -124,7 +125,6 @@ def get_population(stop_id):
                         previous_timestamp += timedelta(minutes=30)
                         result.append(models.PopulationDensity(previous_timestamp, 0))
                     else:
-                        result.append(models.PopulationDensity(timestamp, amount))
                         break
             result.append(models.PopulationDensity(timestamp, amount))
             previous_timestamp = timestamp

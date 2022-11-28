@@ -1,0 +1,87 @@
+type Query {
+  """
+  Returns list of takable bus from origin to destination
+  
+  Equivalent to GET /bus/{stopIdOrigin}/{stopIdDest}
+  """
+  bus(stopIdDest: Int!, stopIdOrigin: Int!): [Route]
+
+  """
+  Returns all bus stops for given route
+  
+  Equivalent to GET /route/{busId}
+  """
+  bus2(busId: Int!): Bus2
+
+  """
+  Returns complete details of the specified Talai bus stop
+  
+  Equivalent to GET /busstop/{stopId}
+  """
+  busstop(stopId: Int!): Busstop
+
+  """
+  Returns weather detail of the specified Talai bus stop
+  
+  Equivalent to GET /busstop/{stopId}/weather/{sensor}
+  """
+  busstopWeather(sensor: String!, stopId: Int!): [BusstopWeather2]
+
+  """
+  Returns list of Talai bus stops in KU
+  
+  Equivalent to GET /busstops
+  """
+  busstops: [Busstop]
+
+  """
+  Get population density in each KU Talai bus
+  
+  Equivalent to GET /population/{stopId}
+  """
+  population(stopId: Int!): [PopulationDensity]
+
+  """
+  Returns a list of routes of KU Talai bus
+  
+  Equivalent to GET /routes
+  """
+  routes: [Route]
+}
+
+type Route {
+  routeNumber: Int
+}
+
+type Bus2 {
+  busNumber: Int
+  busStops: [Int]
+}
+
+type Busstop {
+  busstopId: Int
+  lat: Float
+  lon: Float
+  name: String
+}
+
+type BusstopWeather2 {
+  amount: Float
+  busstopId: Int
+  sensor: String
+  timestamp: String
+}
+
+type PopulationDensity {
+  amount: Int
+  timestamp: String
+}
+
+type Mutation {
+  """
+  Increment people in KU Talai bus stop
+  
+  Equivalent to PUT /population/{stopId}
+  """
+  controllerPutPopulation(stopId: Int!): String
+}
