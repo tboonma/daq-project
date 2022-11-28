@@ -225,7 +225,7 @@ No authorization required
 
 ## controllerGetPopulation
 
-> controllerGetPopulation(stopId)
+> [PopulationDensity] controllerGetPopulation(stopId)
 
 Get population density in each KU Talai bus
 
@@ -240,7 +240,7 @@ apiInstance.controllerGetPopulation(stopId, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 });
 ```
@@ -254,7 +254,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+[**[PopulationDensity]**](PopulationDensity.md)
 
 ### Authorization
 
@@ -263,7 +263,7 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 
 ## controllerGetRoutes

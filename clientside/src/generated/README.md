@@ -136,6 +136,7 @@ Class | Method | HTTP request | Description
  - [KuTalaiApi.Bus](docs/Bus.md)
  - [KuTalaiApi.Busstop](docs/Busstop.md)
  - [KuTalaiApi.BusstopWeather](docs/BusstopWeather.md)
+ - [KuTalaiApi.PopulationDensity](docs/PopulationDensity.md)
  - [KuTalaiApi.Route](docs/Route.md)
 
 

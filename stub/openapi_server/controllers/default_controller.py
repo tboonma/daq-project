@@ -6,6 +6,7 @@ from typing import Union
 
 from openapi_server.models.busstop import Busstop  # noqa: E501
 from openapi_server.models.busstop_weather import BusstopWeather  # noqa: E501
+from openapi_server.models.population_density import PopulationDensity  # noqa: E501
 from openapi_server.models.route import Route  # noqa: E501
 from openapi_server import util
 
@@ -79,7 +80,7 @@ def controller_get_population(stop_id):  # noqa: E501
     :param stop_id: 
     :type stop_id: int
 
-    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
+    :rtype: Union[List[PopulationDensity], Tuple[List[PopulationDensity], int], Tuple[List[PopulationDensity], int, Dict[str, str]]
     """
     return 'do some magic!'
 

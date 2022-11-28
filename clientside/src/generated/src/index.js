@@ -16,6 +16,7 @@ import ApiClient from './ApiClient';
 import Bus from './model/Bus';
 import Busstop from './model/Busstop';
 import BusstopWeather from './model/BusstopWeather';
+import PopulationDensity from './model/PopulationDensity';
 import Route from './model/Route';
 import DefaultApi from './api/DefaultApi';
 
@@ -75,6 +76,12 @@ export {
      * @property {module:model/BusstopWeather}
      */
     BusstopWeather,
+
+    /**
+     * The PopulationDensity model constructor.
+     * @property {module:model/PopulationDensity}
+     */
+    PopulationDensity,
 
     /**
      * The Route model constructor.

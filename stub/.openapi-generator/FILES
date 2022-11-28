@@ -15,6 +15,7 @@ openapi_server/models/base_model_.py
 openapi_server/models/bus.py
 openapi_server/models/busstop.py
 openapi_server/models/busstop_weather.py
+openapi_server/models/population_density.py
 openapi_server/models/route.py
 openapi_server/openapi/openapi.yaml
 openapi_server/test/__init__.py

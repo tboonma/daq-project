@@ -123,6 +123,12 @@ paths:
       responses:
         200:
           description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PopulationDensity'
 
 components:
   schemas:
@@ -166,3 +172,10 @@ components:
           type: string
         amount:
           type: number
+    PopulationDensity:
+      type: object
+      properties:
+        timestamp:
+          type: string
+        amount:
+          type: integer

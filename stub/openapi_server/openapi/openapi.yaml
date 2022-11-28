@@ -4,7 +4,7 @@ info:
   title: KU Talai API
   version: 1.0.0
 servers:
-- url: /talai-api/v1
+- url: http://127.0.0.1:8080/talai-api/v1
 paths:
   /bus/{stopIdOrigin}/{stopIdDest}:
     get:
@@ -104,6 +104,12 @@ paths:
         style: simple
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/PopulationDensity'
+                type: array
           description: Success
       summary: Get population density in each KU Talai bus
       x-openapi-router-controller: openapi_server.controllers.default_controller
@@ -219,4 +225,17 @@ components:
           title: amount
           type: number
       title: BusstopWeather
+      type: object
+    PopulationDensity:
+      example:
+        amount: 0
+        timestamp: timestamp
+      properties:
+        timestamp:
+          title: timestamp
+          type: string
+        amount:
+          title: amount
+          type: integer
+      title: PopulationDensity
       type: object

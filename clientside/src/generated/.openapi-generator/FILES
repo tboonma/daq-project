@@ -6,6 +6,7 @@ docs/Bus.md
 docs/Busstop.md
 docs/BusstopWeather.md
 docs/DefaultApi.md
+docs/PopulationDensity.md
 docs/Route.md
 git_push.sh
 mocha.opts
@@ -16,4 +17,6 @@ src/index.js
 src/model/Bus.js
 src/model/Busstop.js
 src/model/BusstopWeather.js
+src/model/PopulationDensity.js
 src/model/Route.js
+test/model/PopulationDensity.spec.js

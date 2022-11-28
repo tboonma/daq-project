@@ -15,6 +15,7 @@
 import ApiClient from "../ApiClient";
 import Busstop from '../model/Busstop';
 import BusstopWeather from '../model/BusstopWeather';
+import PopulationDensity from '../model/PopulationDensity';
 import Route from '../model/Route';
 
 /**
@@ -236,7 +237,7 @@ export default class DefaultApi {
      * Callback function to receive the result of the controllerGetPopulation operation.
      * @callback module:api/DefaultApi~controllerGetPopulationCallback
      * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
+     * @param {Array.<module:model/PopulationDensity>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -244,6 +245,7 @@ export default class DefaultApi {
      * Get population density in each KU Talai bus
      * @param {Number} stopId 
      * @param {module:api/DefaultApi~controllerGetPopulationCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<module:model/PopulationDensity>}
      */
     controllerGetPopulation(stopId, callback) {
       let postBody = null;
@@ -264,8 +266,8 @@ export default class DefaultApi {
 
       let authNames = [];
       let contentTypes = [];
-      let accepts = [];
-      let returnType = null;
+      let accepts = ['application/json'];
+      let returnType = [PopulationDensity];
       return this.apiClient.callApi(
         '/population/{stopId}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
