@@ -21,15 +21,21 @@ This project is part of Data Acquisition and Integration 2022. You can find the 
 2. Create an `.env` file from [example.env](example.env)
 3. Generate new server stub
 ```
+npm i
 npm run gen-server
 ```
 4. Install all dependencies
 
 ```
 pip install -r requirements.txt
-npm i
 ```
 
+6. Build React as static
+```
+cd clientside
+npm i
+npm run build
+```
 5. Run project locally
 
 ```
