@@ -84,6 +84,12 @@ paths:
       responses:
         200:
           description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: integer
   /route/{busId}:
     parameters:
       - name: busId
@@ -114,6 +120,10 @@ paths:
       responses:
         200:
           description: Success
+          content:
+            application/json:
+              schema:
+                type: string
     get:
       summary: Get population density in each KU Talai bus
       operationId: controller.get_population

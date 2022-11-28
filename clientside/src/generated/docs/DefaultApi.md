@@ -267,7 +267,7 @@ No authorization required
 
 ## controllerGetTakableBus
 
-> controllerGetTakableBus(stopIdOrigin, stopIdDest)
+> [Number] controllerGetTakableBus(stopIdOrigin, stopIdDest)
 
 Returns list of takable bus from origin to destination
 
@@ -283,7 +283,7 @@ apiInstance.controllerGetTakableBus(stopIdOrigin, stopIdDest, (error, data, resp
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 });
 ```
@@ -298,7 +298,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**[Number]**
 
 ### Authorization
 
@@ -307,12 +307,12 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 
 
 ## controllerPutPopulation
 
-> controllerPutPopulation(stopId)
+> String controllerPutPopulation(stopId)
 
 Increment people in KU Talai bus stop
 
@@ -327,7 +327,7 @@ apiInstance.controllerPutPopulation(stopId, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
-    console.log('API called successfully.');
+    console.log('API called successfully. Returned data: ' + data);
   }
 });
 ```
@@ -341,7 +341,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-null (empty response body)
+**String**
 
 ### Authorization
 
@@ -350,5 +350,5 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: Not defined
+- **Accept**: application/json
 

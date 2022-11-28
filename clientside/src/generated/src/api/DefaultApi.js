@@ -282,7 +282,7 @@ export default class DefaultApi {
      * Callback function to receive the result of the controllerGetTakableBus operation.
      * @callback module:api/DefaultApi~controllerGetTakableBusCallback
      * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
+     * @param {Array.<Number>} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -291,6 +291,7 @@ export default class DefaultApi {
      * @param {Number} stopIdOrigin 
      * @param {Number} stopIdDest 
      * @param {module:api/DefaultApi~controllerGetTakableBusCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<Number>}
      */
     controllerGetTakableBus(stopIdOrigin, stopIdDest, callback) {
       let postBody = null;
@@ -316,8 +317,8 @@ export default class DefaultApi {
 
       let authNames = [];
       let contentTypes = [];
-      let accepts = [];
-      let returnType = null;
+      let accepts = ['application/json'];
+      let returnType = ['Number'];
       return this.apiClient.callApi(
         '/bus/{stopIdOrigin}/{stopIdDest}', 'GET',
         pathParams, queryParams, headerParams, formParams, postBody,
@@ -329,7 +330,7 @@ export default class DefaultApi {
      * Callback function to receive the result of the controllerPutPopulation operation.
      * @callback module:api/DefaultApi~controllerPutPopulationCallback
      * @param {String} error Error message, if any.
-     * @param data This operation does not return a value.
+     * @param {String} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
      */
 
@@ -337,6 +338,7 @@ export default class DefaultApi {
      * Increment people in KU Talai bus stop
      * @param {Number} stopId 
      * @param {module:api/DefaultApi~controllerPutPopulationCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link String}
      */
     controllerPutPopulation(stopId, callback) {
       let postBody = null;
@@ -357,8 +359,8 @@ export default class DefaultApi {
 
       let authNames = [];
       let contentTypes = [];
-      let accepts = [];
-      let returnType = null;
+      let accepts = ['application/json'];
+      let returnType = 'String';
       return this.apiClient.callApi(
         '/population/{stopId}', 'PUT',
         pathParams, queryParams, headerParams, formParams, postBody,

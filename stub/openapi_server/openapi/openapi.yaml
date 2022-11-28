@@ -26,6 +26,12 @@ paths:
         style: simple
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  type: integer
+                type: array
           description: Success
       summary: Returns list of takable bus from origin to destination
       x-openapi-router-controller: openapi_server.controllers.default_controller
@@ -117,6 +123,10 @@ paths:
         style: simple
       responses:
         "200":
+          content:
+            application/json:
+              schema:
+                type: string
           description: Success
       summary: Increment people in KU Talai bus stop
       x-openapi-router-controller: openapi_server.controllers.default_controller

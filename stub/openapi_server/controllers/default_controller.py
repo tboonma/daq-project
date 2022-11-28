@@ -96,7 +96,7 @@ def controller_get_takable_bus(stop_id_origin, stop_id_dest):  # noqa: E501
     :param stop_id_dest: 
     :type stop_id_dest: int
 
-    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
+    :rtype: Union[List[int], Tuple[List[int], int], Tuple[List[int], int, Dict[str, str]]
     """
     return 'do some magic!'
 
@@ -109,6 +109,6 @@ def controller_put_population(stop_id):  # noqa: E501
     :param stop_id: 
     :type stop_id: int
 
-    :rtype: Union[None, Tuple[None, int], Tuple[None, int, Dict[str, str]]
+    :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """
     return 'do some magic!'
