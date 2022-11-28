@@ -59,7 +59,6 @@ def get_buses():
     return "Doing something"
 
 def put_population(stop_id):
-
     with pool.connection() as conn, conn.cursor() as cs:
         cs.execute("""
             INSERT INTO population (ts, bus_stop_id)
@@ -73,10 +72,23 @@ def put_population(stop_id):
 def get_population(stop_id):
     with pool.connection() as conn, conn.cursor() as cs:
         cs.execute("""
-            SELECT COUNT(*), TIMESTAMP(DATE(ts), (HOUR(ts) DIV 6)*6*10000) AS d
+            SELECT TIMESTAMP(DATE(ts), (HOUR(ts)*10000) + ((MINUTE(ts) DIV 30)*30*100)) AS d, COUNT(*), bus_stop_id
             FROM population
+            WHERE bus_stop_id=%s
             GROUP BY d
         """, [stop_id])
-        result = cs.fetchall()
-        print(result)
-    return "Doing something"
+        previous_timestamp = None
+        result = []
+        for (timestamp, amount, _) in cs.fetchall():
+            if previous_timestamp:
+                while True:
+                    timediff = timestamp - previous_timestamp
+                    if (timediff.total_seconds()/60 > 31):
+                        previous_timestamp += timedelta(minutes=30)
+                        result.append(models.PopulationDensity(previous_timestamp, 0))
+                    else:
+                        result.append(models.PopulationDensity(timestamp, amount))
+                        break
+            result.append(models.PopulationDensity(timestamp, amount))
+            previous_timestamp = timestamp
+        return result
