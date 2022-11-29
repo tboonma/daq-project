@@ -48,7 +48,7 @@ def get_busstop_weather(stop_id):
     with pool.connection() as conn, conn.cursor() as cs:
         logging.info("Executing query...")
         cs.execute("""
-            SELECT bus_stop_id, TIMESTAMP(DATE(ts), (HOUR(ts)*10000) + ((MINUTE(ts) DIV 30)*30*100)) AS d, AVG(value), sensor
+            SELECT bus_stop_id, TIMESTAMP(DATE(ts), (HOUR(ts))*10000) AS d, AVG(value), sensor
             FROM weather 
             WHERE bus_stop_id=%s AND sensor="temperature"
             GROUP BY d
@@ -62,7 +62,7 @@ def get_busstop_aqi(stop_id):
     with pool.connection() as conn, conn.cursor() as cs:
         logging.info("Executing query...")
         cs.execute("""
-            SELECT bus_stop_id, TIMESTAMP(DATE(ts), (HOUR(ts)*10000) + ((MINUTE(ts) DIV 30)*30*100)) AS d, AVG(value), sensor
+            SELECT bus_stop_id, TIMESTAMP(DATE(ts), (HOUR(ts))*10000) AS d, AVG(value), sensor
             FROM weather 
             WHERE bus_stop_id=%s AND sensor="pm25"
             GROUP BY d
