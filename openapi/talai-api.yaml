@@ -19,6 +19,11 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Busstop'
+          links:
+            busstopInfo:
+              operationId: controller.get_busstop
+              parameters:
+                stopId: $response.body#/busstopId
   /busstop/{stopId}:
     parameters:
       - name: stopId
@@ -40,15 +45,15 @@ paths:
             temperature:
               operationId: controller.get_busstop_weather
               parameters:
-                stopId: $response.body#/stopId
+                stopId: $response.body#/busstopId
             aqi:
               operationId: controller.get_busstop_aqi
               parameters:
-                stopId: $response.body#/stopId
+                stopId: $response.body#/busstopId
             population:
               operationId: controller.get_population
               parameters:
-                stopId: $response.body#/stopId
+                stopId: $response.body#/busstopId
   /busstop/{stopId}/temperature:
     parameters:
       - name: stopId
@@ -124,31 +129,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Route'
-          links:
-            originTemperature:
-              operationId: controller.get_busstop_weather
-              parameters:
-                stopId: $response.body#/stopIdOrigin
-            originAqi:
-              operationId: controller.get_busstop_aqi
-              parameters:
-                stopId: $response.body#/stopIdOrigin
-            originPopulation:
-              operationId: controller.get_population
-              parameters:
-                stopId: $response.body#/stopIdOrigin
-            destTemperature:
-              operationId: controller.get_busstop_weather
-              parameters:
-                stopId: $response.body#/stopIdDest
-            destAqi:
-              operationId: controller.get_busstop_aqi
-              parameters:
-                stopId: $response.body#/stopIdDest
-            destPopulation:
-              operationId: controller.get_population
-              parameters:
-                stopId: $response.body#/stopIdDest
   /route/{busId}:
     parameters:
       - name: busId
@@ -199,7 +179,7 @@ paths:
             busstopInfo:
               operationId: controller.get_busstop
               parameters:
-                stopId: $response.body#/stopId
+                stopId: $response.body#/busstopId
 
 components:
   schemas:
