@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "DISABLE_ESLINT_PLUGIN=true react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "gen-client": "openapi-generator-cli generate -i ../openapi/talai-api.yaml -g javascript -o src/generated --additional-properties=disallowAdditionalPropertiesIfNotPresent=false,supportsES6=true --enable-post-process-file && eslint --fix src/generated/**/*.js"
