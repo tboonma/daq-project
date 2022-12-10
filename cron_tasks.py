@@ -21,6 +21,8 @@ pool = PooledDB(creator=pymysql,
                 maxconnections=1,
                 blocking=True)
 
+print(f"MySQL: {DB_USER}@{DB_HOST}")
+
 def weather_open_meteo():
     print("[Open-Meteo] Getting all busstop...")
     results = get_busstops()
