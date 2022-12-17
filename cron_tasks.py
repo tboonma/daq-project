@@ -111,7 +111,7 @@ def generate_population():
                         )
                     """, [
                         datetime.now(th_timezone),
-                        result.busstop_id
+                        result.id
                     ])
                     conn.commit()
             print(f"[Population] {result.name} population inserted...")
