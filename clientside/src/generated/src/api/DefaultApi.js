@@ -165,6 +165,48 @@ export default class DefaultApi {
     }
 
     /**
+     * Callback function to receive the result of the controllerGetBusstopHumidity operation.
+     * @callback module:api/DefaultApi~controllerGetBusstopHumidityCallback
+     * @param {String} error Error message, if any.
+     * @param {Array.<module:model/BusstopWeather>} data The data returned by the service call.
+     * @param {String} response The complete HTTP response.
+     */
+
+    /**
+     * Returns humidity detail of the specified Talai bus stop
+     * @param {Number} stopId 
+     * @param {module:api/DefaultApi~controllerGetBusstopHumidityCallback} callback The callback function, accepting three arguments: error, data, response
+     * data is of type: {@link Array.<module:model/BusstopWeather>}
+     */
+    controllerGetBusstopHumidity(stopId, callback) {
+      let postBody = null;
+      // verify the required parameter 'stopId' is set
+      if (stopId === undefined || stopId === null) {
+        throw new Error("Missing the required parameter 'stopId' when calling controllerGetBusstopHumidity");
+      }
+
+      let pathParams = {
+        'stopId': stopId
+      };
+      let queryParams = {
+      };
+      let headerParams = {
+      };
+      let formParams = {
+      };
+
+      let authNames = [];
+      let contentTypes = [];
+      let accepts = ['application/json'];
+      let returnType = [BusstopWeather];
+      return this.apiClient.callApi(
+        '/busstop/{stopId}/humidity', 'GET',
+        pathParams, queryParams, headerParams, formParams, postBody,
+        authNames, contentTypes, accepts, returnType, null, callback
+      );
+    }
+
+    /**
      * Callback function to receive the result of the controllerGetBusstopWeather operation.
      * @callback module:api/DefaultApi~controllerGetBusstopWeatherCallback
      * @param {String} error Error message, if any.

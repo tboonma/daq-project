@@ -28,6 +28,13 @@ type Query {
   busstopAqi(stopId: Int!): [BusstopWeather]
 
   """
+  Returns humidity detail of the specified Talai bus stop
+  
+  Equivalent to GET /busstop/{stopId}/humidity
+  """
+  busstopHumidity(stopId: Int!): [BusstopWeather]
+
+  """
   Returns weather detail of the specified Talai bus stop
   
   Equivalent to GET /busstop/{stopId}/temperature
@@ -67,7 +74,8 @@ type Bus2 {
 
 type Busstop {
   aqi: [BusstopWeather]
-  busstopId: Int
+  busstopId: String
+  id: Int
   lat: Float
   lon: Float
   name: String

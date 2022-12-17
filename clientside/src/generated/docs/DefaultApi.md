@@ -7,6 +7,7 @@ Method | HTTP request | Description
 [**controllerGetBusRoute**](DefaultApi.md#controllerGetBusRoute) | **GET** /route/{busId} | Returns all bus stops for given route
 [**controllerGetBusstop**](DefaultApi.md#controllerGetBusstop) | **GET** /busstop/{stopId} | Returns complete details of the specified Talai bus stop
 [**controllerGetBusstopAqi**](DefaultApi.md#controllerGetBusstopAqi) | **GET** /busstop/{stopId}/aqi | Returns PM2.5 detail of the specified Talai bus stop
+[**controllerGetBusstopHumidity**](DefaultApi.md#controllerGetBusstopHumidity) | **GET** /busstop/{stopId}/humidity | Returns humidity detail of the specified Talai bus stop
 [**controllerGetBusstopWeather**](DefaultApi.md#controllerGetBusstopWeather) | **GET** /busstop/{stopId}/temperature | Returns weather detail of the specified Talai bus stop
 [**controllerGetBusstops**](DefaultApi.md#controllerGetBusstops) | **GET** /busstops | Returns list of Talai bus stops in KU
 [**controllerGetPopulation**](DefaultApi.md#controllerGetPopulation) | **GET** /population/{stopId} | Get population density in each KU Talai bus
@@ -116,6 +117,49 @@ import KuTalaiApi from 'ku_talai_api';
 let apiInstance = new KuTalaiApi.DefaultApi();
 let stopId = 56; // Number | 
 apiInstance.controllerGetBusstopAqi(stopId, (error, data, response) => {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+});
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **stopId** | **Number**|  | 
+
+### Return type
+
+[**[BusstopWeather]**](BusstopWeather.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+
+## controllerGetBusstopHumidity
+
+> [BusstopWeather] controllerGetBusstopHumidity(stopId)
+
+Returns humidity detail of the specified Talai bus stop
+
+### Example
+
+```javascript
+import KuTalaiApi from 'ku_talai_api';
+
+let apiInstance = new KuTalaiApi.DefaultApi();
+let stopId = 56; // Number | 
+apiInstance.controllerGetBusstopHumidity(stopId, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {

@@ -92,6 +92,25 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/BusstopWeather'
+  /busstop/{stopId}/humidity:
+    parameters:
+      - name: stopId
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Returns humidity detail of the specified Talai bus stop
+      operationId: controller.get_busstop_humidity
+      responses:
+        200:
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BusstopWeather'
   /routes:
     get:
       summary: Returns a list of routes of KU Talai bus
@@ -186,8 +205,10 @@ components:
     Busstop:
       type: object
       properties:
-        busstopId:
+        id:
           type: integer
+        busstopId:
+          type: string
         name:
           type: string
         lat:

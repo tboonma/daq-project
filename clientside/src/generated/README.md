@@ -123,6 +123,7 @@ Class | Method | HTTP request | Description
 *KuTalaiApi.DefaultApi* | [**controllerGetBusRoute**](docs/DefaultApi.md#controllerGetBusRoute) | **GET** /route/{busId} | Returns all bus stops for given route
 *KuTalaiApi.DefaultApi* | [**controllerGetBusstop**](docs/DefaultApi.md#controllerGetBusstop) | **GET** /busstop/{stopId} | Returns complete details of the specified Talai bus stop
 *KuTalaiApi.DefaultApi* | [**controllerGetBusstopAqi**](docs/DefaultApi.md#controllerGetBusstopAqi) | **GET** /busstop/{stopId}/aqi | Returns PM2.5 detail of the specified Talai bus stop
+*KuTalaiApi.DefaultApi* | [**controllerGetBusstopHumidity**](docs/DefaultApi.md#controllerGetBusstopHumidity) | **GET** /busstop/{stopId}/humidity | Returns humidity detail of the specified Talai bus stop
 *KuTalaiApi.DefaultApi* | [**controllerGetBusstopWeather**](docs/DefaultApi.md#controllerGetBusstopWeather) | **GET** /busstop/{stopId}/temperature | Returns weather detail of the specified Talai bus stop
 *KuTalaiApi.DefaultApi* | [**controllerGetBusstops**](docs/DefaultApi.md#controllerGetBusstops) | **GET** /busstops | Returns list of Talai bus stops in KU
 *KuTalaiApi.DefaultApi* | [**controllerGetPopulation**](docs/DefaultApi.md#controllerGetPopulation) | **GET** /population/{stopId} | Get population density in each KU Talai bus

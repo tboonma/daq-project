@@ -90,6 +90,28 @@ paths:
           description: Success
       summary: Returns PM2.5 detail of the specified Talai bus stop
       x-openapi-router-controller: openapi_server.controllers.default_controller
+  /busstop/{stopId}/humidity:
+    get:
+      operationId: controller_get_busstop_humidity
+      parameters:
+      - explode: false
+        in: path
+        name: stopId
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/BusstopWeather'
+                type: array
+          description: Success
+      summary: Returns humidity detail of the specified Talai bus stop
+      x-openapi-router-controller: openapi_server.controllers.default_controller
   /busstop/{stopId}/temperature:
     get:
       operationId: controller_get_busstop_weather
@@ -215,14 +237,18 @@ components:
   schemas:
     Busstop:
       example:
-        busstopId: 0
+        busstopId: busstopId
         name: name
         lon: 1.4658129805029452
+        id: 0
         lat: 6.027456183070403
       properties:
+        id:
+          title: id
+          type: integer
         busstopId:
           title: busstopId
-          type: integer
+          type: string
         name:
           title: name
           type: string

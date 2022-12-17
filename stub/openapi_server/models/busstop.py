@@ -15,11 +15,13 @@ class Busstop(Model):
     Do not edit the class manually.
     """
 
-    def __init__(self, busstop_id=None, name=None, lat=None, lon=None):  # noqa: E501
+    def __init__(self, id=None, busstop_id=None, name=None, lat=None, lon=None):  # noqa: E501
         """Busstop - a model defined in OpenAPI
 
+        :param id: The id of this Busstop.  # noqa: E501
+        :type id: int
         :param busstop_id: The busstop_id of this Busstop.  # noqa: E501
-        :type busstop_id: int
+        :type busstop_id: str
         :param name: The name of this Busstop.  # noqa: E501
         :type name: str
         :param lat: The lat of this Busstop.  # noqa: E501
@@ -28,19 +30,22 @@ class Busstop(Model):
         :type lon: float
         """
         self.openapi_types = {
-            'busstop_id': int,
+            'id': int,
+            'busstop_id': str,
             'name': str,
             'lat': float,
             'lon': float
         }
 
         self.attribute_map = {
+            'id': 'id',
             'busstop_id': 'busstopId',
             'name': 'name',
             'lat': 'lat',
             'lon': 'lon'
         }
 
+        self._id = id
         self._busstop_id = busstop_id
         self._name = name
         self._lat = lat
@@ -58,12 +63,33 @@ class Busstop(Model):
         return util.deserialize_model(dikt, cls)
 
     @property
+    def id(self):
+        """Gets the id of this Busstop.
+
+
+        :return: The id of this Busstop.
+        :rtype: int
+        """
+        return self._id
+
+    @id.setter
+    def id(self, id):
+        """Sets the id of this Busstop.
+
+
+        :param id: The id of this Busstop.
+        :type id: int
+        """
+
+        self._id = id
+
+    @property
     def busstop_id(self):
         """Gets the busstop_id of this Busstop.
 
 
         :return: The busstop_id of this Busstop.
-        :rtype: int
+        :rtype: str
         """
         return self._busstop_id
 
@@ -73,7 +99,7 @@ class Busstop(Model):
 
 
         :param busstop_id: The busstop_id of this Busstop.
-        :type busstop_id: int
+        :type busstop_id: str
         """
 
         self._busstop_id = busstop_id
