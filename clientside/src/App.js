@@ -155,7 +155,9 @@ function App() {
   }
 
   useEffect(() => {
-    createAqiChart(aqiBusstop).then((val) => setAqiData(val.busstopAqi))
+    createAqiChart(aqiBusstop).then((val) => {
+      if (val !== undefined) setAqiData(val.busstopAqi)
+    })
   }, [aqiBusstop])
 
   useEffect(() => {
@@ -164,7 +166,7 @@ function App() {
 
   useEffect(() => {
     createWeatherChart(weatherBusstop).then((val) => {
-      setWeatherData(val.busstopTemperature)
+      if (val !== undefined) setWeatherData(val.busstopTemperature)
     })
   }, [weatherBusstop])
 
