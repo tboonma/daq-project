@@ -35,7 +35,7 @@ function App() {
 
   const insertPopulation = (e) => {
     e.preventDefault()
-    api.controllerPutPopulation(origin.busstopId, () => setInsertButton(false))
+    api.controllerPutPopulation(origin.id, () => setInsertButton(false))
   }
 
   const changeOriginHandler = (event) => {
@@ -70,7 +70,7 @@ function App() {
       body: JSON.stringify({
         query: `
         {
-          busstopTemperature(stopId: ${sensorBusstop.busstopId}) {
+          busstopTemperature(stopId: ${sensorBusstop.id}) {
             amount,
             timestamp
           }
@@ -93,7 +93,7 @@ function App() {
       body: JSON.stringify({
         query: `
         {
-          busstopAqi(stopId: ${sensorBusstop.busstopId}) {
+          busstopAqi(stopId: ${sensorBusstop.id}) {
             amount,
             timestamp
           }
@@ -116,7 +116,7 @@ function App() {
       body: JSON.stringify({
         query: `
         {
-          population(stopId: ${populationBusstop.busstopId}) {
+          population(stopId: ${populationBusstop.id}) {
             timestamp,
             amount
           }
@@ -139,7 +139,7 @@ function App() {
       body: JSON.stringify({
         query: `
         {
-          bus(stopIdOrigin: ${origin.busstopId}, stopIdDest: ${destination.busstopId}) {
+          bus(stopIdOrigin: ${origin.id}, stopIdDest: ${destination.id}) {
             routeNumber
           }
         }`
@@ -223,7 +223,7 @@ function App() {
                 onChange={changeOriginHandler}
               >
                 {busstops.map((busstop) => (
-                  <MenuItem key={busstop.busstopId} value={busstop}>
+                  <MenuItem key={busstop.id} value={busstop}>
                     {busstop.name}
                   </MenuItem>
                 ))}
@@ -245,7 +245,7 @@ function App() {
                 onChange={(e) => setDestination(e.target.value)}
               >
                 {busstops.map((busstop) => (
-                  <MenuItem key={busstop.busstopId} value={busstop}>
+                  <MenuItem key={busstop.id} value={busstop}>
                     {busstop.name}
                   </MenuItem>
                 ))}
@@ -273,7 +273,7 @@ function App() {
             onChange={changeWeatherHandler}
           >
             {busstops.map((busstop) => (
-              <MenuItem key={busstop.busstopId} value={busstop}>
+              <MenuItem key={busstop.id} value={busstop}>
                 {busstop.name}
               </MenuItem>
             ))}
@@ -299,7 +299,7 @@ function App() {
             onChange={changePopulationHandler}
           >
             {busstops.map((busstop) => (
-              <MenuItem key={busstop.busstopId} value={busstop}>
+              <MenuItem key={busstop.id} value={busstop}>
                 {busstop.name}
               </MenuItem>
             ))}
@@ -325,7 +325,7 @@ function App() {
             onChange={changeAqiHandler}
           >
             {busstops.map((busstop) => (
-              <MenuItem key={busstop.busstopId} value={busstop}>
+              <MenuItem key={busstop.id} value={busstop}>
                 {busstop.name}
               </MenuItem>
             ))}

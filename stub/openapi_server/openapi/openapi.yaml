@@ -57,15 +57,15 @@ paths:
             temperature:
               operationId: controller.get_busstop_weather
               parameters:
-                stopId: $response.body#/busstopId
+                stopId: $response.body#/id
             aqi:
               operationId: controller.get_busstop_aqi
               parameters:
-                stopId: $response.body#/busstopId
+                stopId: $response.body#/id
             population:
               operationId: controller.get_population
               parameters:
-                stopId: $response.body#/busstopId
+                stopId: $response.body#/id
       summary: Returns complete details of the specified Talai bus stop
       x-openapi-router-controller: openapi_server.controllers.default_controller
   /busstop/{stopId}/aqi:
@@ -150,7 +150,7 @@ paths:
             busstopInfo:
               operationId: controller.get_busstop
               parameters:
-                stopId: $response.body#/busstopId
+                stopId: $response.body#/id
       summary: Returns list of Talai bus stops in KU
       x-openapi-router-controller: openapi_server.controllers.default_controller
   /population/{stopId}:
@@ -177,7 +177,7 @@ paths:
             busstopInfo:
               operationId: controller.get_busstop
               parameters:
-                stopId: $response.body#/busstopId
+                stopId: $response.body#/id
       summary: Get population density in each KU Talai bus
       x-openapi-router-controller: openapi_server.controllers.default_controller
     put:

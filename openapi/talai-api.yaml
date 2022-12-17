@@ -23,7 +23,7 @@ paths:
             busstopInfo:
               operationId: controller.get_busstop
               parameters:
-                stopId: $response.body#/busstopId
+                stopId: $response.body#/id
   /busstop/{stopId}:
     parameters:
       - name: stopId
@@ -45,15 +45,15 @@ paths:
             temperature:
               operationId: controller.get_busstop_weather
               parameters:
-                stopId: $response.body#/busstopId
+                stopId: $response.body#/id
             aqi:
               operationId: controller.get_busstop_aqi
               parameters:
-                stopId: $response.body#/busstopId
+                stopId: $response.body#/id
             population:
               operationId: controller.get_population
               parameters:
-                stopId: $response.body#/busstopId
+                stopId: $response.body#/id
   /busstop/{stopId}/temperature:
     parameters:
       - name: stopId
@@ -198,7 +198,7 @@ paths:
             busstopInfo:
               operationId: controller.get_busstop
               parameters:
-                stopId: $response.body#/busstopId
+                stopId: $response.body#/id
 
 components:
   schemas:

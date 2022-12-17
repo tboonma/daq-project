@@ -3,15 +3,14 @@
     "browser": true,
     "es2021": true
   },
-  "extends": [
-    "plugin:react/recommended",
-    "plugin:eqeqeq-fix/recommended"
-  ],
+  "extends": ["plugin:react/recommended", "plugin:eqeqeq-fix/recommended"],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "plugins": ["react"],
-  "rules": {}
+  "rules": {
+    "react/prop-types": "off"
+  }
 }
