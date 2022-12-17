@@ -51,11 +51,11 @@ def serve(path):
     else:
         return render_template('index.html')
 
-@app.route("/graphql", methods=["GET"])
+@flask_app.route("/graphql", methods=["GET"])
 def graphql_playground():
     return PLAYGROUND_HTML, 200
 
-@app.route("/graphql", methods=["POST"])
+@flask_app.route("/graphql", methods=["POST"])
 def graphql_server():
     data = request.get_json()
     success, result = graphql_sync(
