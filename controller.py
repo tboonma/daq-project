@@ -47,9 +47,9 @@ def get_busstop_weather(stop_id):
     with pool.connection() as conn, conn.cursor() as cs:
         logging.info("Executing query...")
         cs.execute("""
-            SELECT id, TIMESTAMP(DATE(ts), (HOUR(ts))*10000) AS d, AVG(value), sensor
+            SELECT bus_stop_id, TIMESTAMP(DATE(ts), (HOUR(ts))*10000) AS d, AVG(value), sensor
             FROM weather 
-            WHERE id=%s AND sensor="temperature"
+            WHERE bus_stop_id=%s AND sensor="temperature"
             GROUP BY d
         """, [stop_id])
         logging.info("Returning result...")
@@ -61,9 +61,9 @@ def get_busstop_aqi(stop_id):
     with pool.connection() as conn, conn.cursor() as cs:
         logging.info("Executing query...")
         cs.execute("""
-            SELECT id, TIMESTAMP(DATE(ts), (HOUR(ts))*10000) AS d, AVG(value), sensor
+            SELECT bus_stop_id, TIMESTAMP(DATE(ts), (HOUR(ts))*10000) AS d, AVG(value), sensor
             FROM weather 
-            WHERE id=%s AND sensor="pm25"
+            WHERE bus_stop_id=%s AND sensor="pm25"
             GROUP BY d
         """, [stop_id])
         logging.info("Returning result...")
@@ -75,9 +75,9 @@ def get_busstop_humidity(stop_id):
     with pool.connection() as conn, conn.cursor() as cs:
         logging.info("Executing query...")
         cs.execute("""
-            SELECT id, TIMESTAMP(DATE(ts), (HOUR(ts))*10000) AS d, AVG(value), sensor
+            SELECT bus_stop_id, TIMESTAMP(DATE(ts), (HOUR(ts))*10000) AS d, AVG(value), sensor
             FROM weather 
-            WHERE id=%s AND sensor="pm25"
+            WHERE bus_stop_id=%s AND sensor="pm25"
             GROUP BY d
         """, [stop_id])
         logging.info("Returning result...")
@@ -104,7 +104,7 @@ def get_takable_bus(stop_id_origin, stop_id_dest):
             SELECT DISTINCT r1.bus_number
             FROM route r1
             INNER JOIN route r2
-            WHERE r1.bus_number=r2.bus_number AND r1.id=%s AND r2.id=%s
+            WHERE r1.bus_number=r2.bus_number AND r1.bus_stop_id=%s AND r2.bus_stop_id=%s
         """, [stop_id_origin, stop_id_dest])
         logging.info("Returning result...")
         result = [models.Route(*row) for row in cs.fetchall()]
@@ -115,7 +115,7 @@ def get_bus_route(bus_id):
     with pool.connection() as conn, conn.cursor() as cs:
         logging.info("Executing query...")
         cs.execute("""
-            SELECT DISTINCT bus_number, id
+            SELECT DISTINCT bus_number, bus_stop_id
             FROM route
             WHERE bus_number=%s
         """, [bus_id])
@@ -126,7 +126,7 @@ def get_bus_route(bus_id):
 def put_population(stop_id):
     with pool.connection() as conn, conn.cursor() as cs:
         cs.execute("""
-            INSERT INTO population (ts, id)
+            INSERT INTO population (ts, bus_stop_id)
             VALUES (
                 %s, %s
             )
@@ -137,9 +137,9 @@ def put_population(stop_id):
 def get_population(stop_id):
     with pool.connection() as conn, conn.cursor() as cs:
         cs.execute("""
-            SELECT TIMESTAMP(DATE(ts), (HOUR(ts)*10000) + ((MINUTE(ts) DIV 30)*30*100)) AS d, COUNT(*), id
+            SELECT TIMESTAMP(DATE(ts), (HOUR(ts)*10000) + ((MINUTE(ts) DIV 30)*30*100)) AS d, COUNT(*), bus_stop_id
             FROM population
-            WHERE id=%s
+            WHERE bus_stop_id=%s
             GROUP BY d
         """, [stop_id])
         previous_timestamp = None
