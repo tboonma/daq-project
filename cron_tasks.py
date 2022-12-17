@@ -38,7 +38,7 @@ def weather_open_meteo():
                     VALUES (
                         %s, %s, %s, %s
                     )
-                """, [datetime.now(th_timezone), result.busstop_id, data['current_weather']['temperature'], data['current_weather']['windspeed']])
+                """, [datetime.now(th_timezone), result.id, data['current_weather']['temperature'], data['current_weather']['windspeed']])
                 conn.commit()
             print(f"[Open-Meteo] {result.name} weather data inserted...")
 
@@ -58,7 +58,7 @@ def pm25_aqicn():
                     VALUES (
                         %s, %s, %s
                     )
-                """, [datetime.now(th_timezone), result.busstop_id, data['data']['aqi']])
+                """, [datetime.now(th_timezone), result.id, data['data']['aqi']])
                 conn.commit()
             print(f"[AQICN] {result.name} weather data inserted...")
 
@@ -80,7 +80,7 @@ def iqair():
                     )
                 """, [
                     datetime.now(th_timezone),
-                    result.busstop_id,
+                    result.id,
                     data['data']['current']['weather']['tp'],
                     data['data']['current']['weather']['hu'],
                     data['data']['current']['weather']['ws'],
