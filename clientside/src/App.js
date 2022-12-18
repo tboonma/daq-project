@@ -130,28 +130,19 @@ function App() {
 
   const findBus = async (event) => {
     event.preventDefault()
-    const resp = await fetch('/graphql', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify({
-        query: `
-        {
-          bus(stopIdOrigin: ${origin.id}, stopIdDest: ${destination.id}) {
-            routeNumber
-          }
-        }`
+    api
+      .controllerGetTakableBus(parseInt(origin.id), parseInt(destination.id))
+      .then((res) => {
+        console.log(res)
+        if (res.ok) {
+          let availableBus = ''
+          res.body.forEach((bus) => (availableBus += bus.routeNumber + ', '))
+          if (availableBus === '') availableBus = 'Cannot take only 1 bus to go there'
+          setTakableBus(availableBus.slice(0, -2))
+        }
       })
-    })
-    var json = await resp.json()
-    var table = json.data
-    console.log(table.bus)
-    let availableBus = ''
-    table.bus.forEach((bus) => (availableBus += bus.routeNumber + ', '))
-    if (availableBus === '') availableBus = 'Cannot take only 1 bus to go there'
-    setTakableBus(availableBus.slice(0, -2))
+
+    
   }
 
   useEffect(() => {

@@ -164,32 +164,32 @@ def busstops_resolver(_, info):
     return get_busstops()
 
 @query.field("busstop")
-def busstop_resolver(_, info, stop_id):
-    return get_busstop(stop_id)
+def busstop_resolver(_, info, stopId):
+    return get_busstop(stopId)
 
 @query.field("bus")
-def get_takable_bus_resolver(_, info, dest, origin):
-    return get_takable_bus(origin, dest)
+def get_takable_bus_resolver(_, info, stopIdDest, stopIdOrigin):
+    return get_takable_bus(stopIdOrigin, stopIdDest)
 
 @query.field("bus2")
-def get_bus_resolver(_, info, bus_id):
-    return get_bus_route(bus_id)
+def get_bus_resolver(_, info, busId):
+    return get_bus_route(busId)
 
 @query.field("busstopAqi")
-def get_aqi_resolver(_, info, stop_id):
-    return get_busstop_aqi(stop_id)
+def get_aqi_resolver(_, info, stopId):
+    return get_busstop_aqi(stopId)
 
 @query.field("busstopHumidity")
-def get_humidity_resolver(_, info, stop_id):
-    return get_busstop_humidity(stop_id)
+def get_humidity_resolver(_, info, stopId):
+    return get_busstop_humidity(stopId)
 
 @query.field("busstopTemperature")
-def get_temperature_resolver(_, info, stop_id):
-    return get_busstop_weather(stop_id)
+def get_temperature_resolver(_, info, stopId):
+    return get_busstop_weather(stopId)
 
 @query.field("population")
-def get_population_resolver(_, info, stop_id):
-    return get_population(stop_id)
+def get_population_resolver(_, info, stopId):
+    return get_population(stopId)
 
 @query.field("routes")
 def get_routes_resolver(_, info):
