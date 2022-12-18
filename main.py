@@ -21,7 +21,7 @@ try:
     from flask import render_template, request, jsonify
     from flask_cors import CORS
     from ariadne import load_schema_from_path, make_executable_schema, \
-    graphql_sync, snake_case_fallback_resolvers, ObjectType
+    graphql_sync, QueryType
     from ariadne.constants import PLAYGROUND_HTML
 except ModuleNotFoundError:
     print("Please install all required packages by running:"
@@ -29,12 +29,7 @@ except ModuleNotFoundError:
     sys.exit(1)
 
 from openapi_server import encoder
-
-type_defs = load_schema_from_path("schema.graphql")
-schema = make_executable_schema(
-    type_defs, snake_case_fallback_resolvers
-)
-
+query = QueryType()
 app = connexion.FlaskApp(__name__, specification_dir='./', server_args={'static_folder': './clientside/build/static', 'template_folder': './clientside/build'})
 flask_app = app.app
 CORS(flask_app, resources={r"/*": {"origins": "*"}})
@@ -50,6 +45,11 @@ def serve(path):
         return render_template(flask_app.static_folder + '/' + path)
     else:
         return render_template('index.html')
+
+type_defs = load_schema_from_path("schema.graphql")
+schema = make_executable_schema(
+    type_defs, query
+)
 
 @flask_app.route("/graphql", methods=["GET"])
 def graphql_playground():

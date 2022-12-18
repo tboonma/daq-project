@@ -4,6 +4,7 @@ from dbutils.pooled_db import PooledDB
 from config import OPENAPI_STUB_DIR, DB_HOST, DB_USER, DB_PASSWD, DB_NAME
 import logging
 from datetime import datetime, timezone, timedelta
+from main import query
 
 th_timezone = timezone(timedelta(hours=7))
 
@@ -156,3 +157,39 @@ def get_population(stop_id):
             result.append(models.PopulationDensity(timestamp, amount))
             previous_timestamp = timestamp
         return result
+
+@query.field("busstops")
+def busstops_resolver(_, info):
+    return get_busstops()
+
+@query.field("busstop")
+def busstop_resolver(_, info, stop_id):
+    return get_busstop(stop_id)
+
+@query.field("bus")
+def get_takable_bus_resolver(_, info, dest, origin):
+    return get_takable_bus(origin, dest)
+
+@query.field("bus2")
+def get_bus_resolver(_, info, bus_id):
+    return get_bus_route(bus_id)
+
+@query.field("busstopAqi")
+def get_aqi_resolver(_, info, stop_id):
+    return get_busstop_aqi(stop_id)
+
+@query.field("busstopHumidity")
+def get_humidity_resolver(_, info, stop_id):
+    return get_busstop_humidity(stop_id)
+
+@query.field("busstopTemperature")
+def get_temperature_resolver(_, info, stop_id):
+    return get_busstop_weather(stop_id)
+
+@query.field("population")
+def get_population_resolver(_, info, stop_id):
+    return get_population(stop_id)
+
+@query.field("routes")
+def get_routes_resolver(_, info):
+    return get_routes()

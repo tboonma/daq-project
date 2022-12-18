@@ -61,7 +61,7 @@ function App() {
 
   const createWeatherChart = async (sensorBusstop) => {
     if (sensorBusstop === undefined || sensorBusstop === '') return
-    const resp = await fetch('http://localhost:3300/graphql', {
+    const resp = await fetch('/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ function App() {
 
   const createAqiChart = async (sensorBusstop) => {
     if (sensorBusstop === undefined || sensorBusstop === '') return
-    const resp = await fetch('http://localhost:3300/graphql', {
+    const resp = await fetch('/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -107,7 +107,7 @@ function App() {
 
   const createPopulationChart = async () => {
     if (populationBusstop === undefined || populationBusstop === '') return
-    const resp = await fetch('http://localhost:3300/graphql', {
+    const resp = await fetch('/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -130,7 +130,7 @@ function App() {
 
   const findBus = async (event) => {
     event.preventDefault()
-    const resp = await fetch('http://localhost:3300/graphql', {
+    const resp = await fetch('/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
