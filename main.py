@@ -21,15 +21,15 @@ try:
     from flask import render_template, request, jsonify
     from flask_cors import CORS
     from ariadne import load_schema_from_path, make_executable_schema, \
-    graphql_sync, QueryType
+    graphql_sync
     from ariadne.constants import PLAYGROUND_HTML
+    from controller import query
 except ModuleNotFoundError:
     print("Please install all required packages by running:"
           " pip install -r requirements.txt")
     sys.exit(1)
 
 from openapi_server import encoder
-query = QueryType()
 app = connexion.FlaskApp(__name__, specification_dir='./', server_args={'static_folder': './clientside/build/static', 'template_folder': './clientside/build'})
 flask_app = app.app
 CORS(flask_app, resources={r"/*": {"origins": "*"}})

@@ -4,8 +4,9 @@ from dbutils.pooled_db import PooledDB
 from config import OPENAPI_STUB_DIR, DB_HOST, DB_USER, DB_PASSWD, DB_NAME
 import logging
 from datetime import datetime, timezone, timedelta
-from main import query
+from ariadne import QueryType
 
+query = QueryType()
 th_timezone = timezone(timedelta(hours=7))
 
 sys.path.append(OPENAPI_STUB_DIR)
