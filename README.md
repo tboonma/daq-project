@@ -15,13 +15,6 @@ This project is part of Data Acquisition and Integration 2022. You can find the 
 5. GraphQL can be accessed via [`/graphql`](https://ku-travel.tawanb.dev/graphql)
 6. Swagger document can be accessed via [`/talai-api/v1/ui`](https://ku-travel.tawanb.dev/talai-api/v1/ui/)
 
-## Collaborators
-
-| Name                      | Student ID | Major                                                    |
-| ------------------------- | ---------- | -------------------------------------------------------- |
-| Tawan BOONMA              | 6310545272 | Software and Knowledge Engineering, Kasetsart University |
-| Krittamate CHERDPONGTAGIT | 6310545884 | Software and Knowledge Engineering, Kasetsart University |
-
 ### Built With
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
@@ -31,6 +24,13 @@ This project is part of Data Acquisition and Integration 2022. You can find the 
 ![Flask](https://img.shields.io/badge/flask-%23000.svg?style=for-the-badge&logo=flask&logoColor=white)
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![GraphQL](https://img.shields.io/badge/-GraphQL-E10098?style=for-the-badge&logo=graphql&logoColor=white)
+
+## Collaborators
+
+| Name                      | Student ID | Major                                                    |
+| ------------------------- | ---------- | -------------------------------------------------------- |
+| Tawan BOONMA              | 6310545272 | Software and Knowledge Engineering, Kasetsart University |
+| Krittamate CHERDPONGTAGIT | 6310545884 | Software and Knowledge Engineering, Kasetsart University |
 
 ## Getting Started
 
