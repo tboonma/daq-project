@@ -43,7 +43,7 @@ This project is part of Data Acquisition and Integration 2022. You can find the 
 
 ### Installation
 
-1. Clone the repository and use Python virtual environment.
+1. Initialize database from [Initial.sql](initial.sql)
 2. Create an `.env` file from [example.env](example.env)
 3. Generate new server stub and graphql document
 
