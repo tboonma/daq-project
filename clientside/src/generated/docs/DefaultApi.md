@@ -72,7 +72,7 @@ Returns complete details of the specified Talai bus stop
 import KuTalaiApi from 'ku_talai_api';
 
 let apiInstance = new KuTalaiApi.DefaultApi();
-let stopId = 56; // Number | 
+let stopId = "stopId_example"; // String | 
 apiInstance.controllerGetBusstop(stopId, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -87,7 +87,7 @@ apiInstance.controllerGetBusstop(stopId, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **stopId** | **Number**|  | 
+ **stopId** | **String**|  | 
 
 ### Return type
 
@@ -115,7 +115,7 @@ Returns PM2.5 detail of the specified Talai bus stop
 import KuTalaiApi from 'ku_talai_api';
 
 let apiInstance = new KuTalaiApi.DefaultApi();
-let stopId = 56; // Number | 
+let stopId = "stopId_example"; // String | 
 apiInstance.controllerGetBusstopAqi(stopId, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -130,7 +130,7 @@ apiInstance.controllerGetBusstopAqi(stopId, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **stopId** | **Number**|  | 
+ **stopId** | **String**|  | 
 
 ### Return type
 
@@ -158,7 +158,7 @@ Returns humidity detail of the specified Talai bus stop
 import KuTalaiApi from 'ku_talai_api';
 
 let apiInstance = new KuTalaiApi.DefaultApi();
-let stopId = 56; // Number | 
+let stopId = "stopId_example"; // String | 
 apiInstance.controllerGetBusstopHumidity(stopId, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -173,7 +173,7 @@ apiInstance.controllerGetBusstopHumidity(stopId, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **stopId** | **Number**|  | 
+ **stopId** | **String**|  | 
 
 ### Return type
 
@@ -201,7 +201,7 @@ Returns weather detail of the specified Talai bus stop
 import KuTalaiApi from 'ku_talai_api';
 
 let apiInstance = new KuTalaiApi.DefaultApi();
-let stopId = 56; // Number | 
+let stopId = "stopId_example"; // String | 
 apiInstance.controllerGetBusstopWeather(stopId, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -216,7 +216,7 @@ apiInstance.controllerGetBusstopWeather(stopId, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **stopId** | **Number**|  | 
+ **stopId** | **String**|  | 
 
 ### Return type
 
@@ -283,7 +283,7 @@ Get population density in each KU Talai bus
 import KuTalaiApi from 'ku_talai_api';
 
 let apiInstance = new KuTalaiApi.DefaultApi();
-let stopId = 56; // Number | 
+let stopId = "stopId_example"; // String | 
 apiInstance.controllerGetPopulation(stopId, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -298,7 +298,7 @@ apiInstance.controllerGetPopulation(stopId, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **stopId** | **Number**|  | 
+ **stopId** | **String**|  | 
 
 ### Return type
 
@@ -365,8 +365,8 @@ Returns list of takable bus from origin to destination
 import KuTalaiApi from 'ku_talai_api';
 
 let apiInstance = new KuTalaiApi.DefaultApi();
-let stopIdOrigin = 56; // Number | 
-let stopIdDest = 56; // Number | 
+let stopIdOrigin = "stopIdOrigin_example"; // String | 
+let stopIdDest = "stopIdDest_example"; // String | 
 apiInstance.controllerGetTakableBus(stopIdOrigin, stopIdDest, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -381,8 +381,8 @@ apiInstance.controllerGetTakableBus(stopIdOrigin, stopIdDest, (error, data, resp
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **stopIdOrigin** | **Number**|  | 
- **stopIdDest** | **Number**|  | 
+ **stopIdOrigin** | **String**|  | 
+ **stopIdDest** | **String**|  | 
 
 ### Return type
 
@@ -410,7 +410,7 @@ Increment people in KU Talai bus stop
 import KuTalaiApi from 'ku_talai_api';
 
 let apiInstance = new KuTalaiApi.DefaultApi();
-let stopId = 56; // Number | 
+let stopId = "stopId_example"; // String | 
 apiInstance.controllerPutPopulation(stopId, (error, data, response) => {
   if (error) {
     console.error(error);
@@ -425,7 +425,7 @@ apiInstance.controllerPutPopulation(stopId, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **stopId** | **Number**|  | 
+ **stopId** | **String**|  | 
 
 ### Return type
 

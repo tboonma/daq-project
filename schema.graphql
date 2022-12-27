@@ -4,7 +4,7 @@ type Query {
   
   Equivalent to GET /bus/{stopIdOrigin}/{stopIdDest}
   """
-  bus(stopIdDest: Int!, stopIdOrigin: Int!): [Route]
+  bus(stopIdDest: String!, stopIdOrigin: String!): [Route]
 
   """
   Returns all bus stops for given route
@@ -18,28 +18,28 @@ type Query {
   
   Equivalent to GET /busstop/{stopId}
   """
-  busstop(stopId: Int!): Busstop
+  busstop(stopId: String!): Busstop
 
   """
   Returns PM2.5 detail of the specified Talai bus stop
   
   Equivalent to GET /busstop/{stopId}/aqi
   """
-  busstopAqi(stopId: Int!): [BusstopWeather]
+  busstopAqi(stopId: String!): [BusstopWeather]
 
   """
   Returns humidity detail of the specified Talai bus stop
   
   Equivalent to GET /busstop/{stopId}/humidity
   """
-  busstopHumidity(stopId: Int!): [BusstopWeather]
+  busstopHumidity(stopId: String!): [BusstopWeather]
 
   """
   Returns weather detail of the specified Talai bus stop
   
   Equivalent to GET /busstop/{stopId}/temperature
   """
-  busstopTemperature(stopId: Int!): [BusstopWeather]
+  busstopTemperature(stopId: String!): [BusstopWeather]
 
   """
   Returns list of Talai bus stops in KU
@@ -53,7 +53,7 @@ type Query {
   
   Equivalent to GET /population/{stopId}
   """
-  population(stopId: Int!): [PopulationDensity]
+  population(stopId: String!): [PopulationDensity]
 
   """
   Returns a list of routes of KU Talai bus
@@ -75,7 +75,7 @@ type Bus2 {
 type Busstop {
   aqi: [BusstopWeather]
   busstopId: String
-  id: Int
+  id: String
   lat: Float
   lon: Float
   name: String
@@ -101,5 +101,5 @@ type Mutation {
   
   Equivalent to PUT /population/{stopId}
   """
-  controllerPutPopulation(stopId: Int!): String
+  controllerPutPopulation(stopId: String!): String
 }

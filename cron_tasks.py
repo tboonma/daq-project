@@ -9,6 +9,7 @@ from time import sleep
 from dotenv import load_dotenv
 from datetime import datetime, timezone, timedelta
 import random
+from models import *
 
 th_timezone = timezone(timedelta(hours=7))
 load_dotenv()
@@ -26,20 +27,14 @@ print(f"MySQL: {DB_USER}@{DB_HOST}")
 def weather_open_meteo():
     print("[Open-Meteo] Getting all busstop...")
     results = get_busstops()
+    open_meteo = OpenMeteo()
     if results:
         for result in results:
             print(f"[Open-Meteo] Getting weather data for {result.name}...")
             response = requests.get(f"https://api.open-meteo.com/v1/forecast?latitude={result.lat}&longitude={result.lon}&current_weather=true")
             data = response.json()
             print(f"[Open-Meteo] Inserting weather data for {result.name}...")
-            with pool.connection() as conn, conn.cursor() as cs:
-                cs.execute("""
-                    INSERT INTO open_meteo (ts, bus_stop_id, temperature, windspeed)
-                    VALUES (
-                        %s, %s, %s, %s
-                    )
-                """, [datetime.now(th_timezone), result.id, data['current_weather']['temperature'], data['current_weather']['windspeed']])
-                conn.commit()
+            open_meteo.create(result.busstop_id, data['current_weather']['temperature'], data['current_weather']['windspeed'])
             print(f"[Open-Meteo] {result.name} weather data inserted...")
 
 def pm25_aqicn():
@@ -52,14 +47,8 @@ def pm25_aqicn():
             data = response.json()
             print(data)
             print(f"[AQICN] Inserting weather data for {result.name}...")
-            with pool.connection() as conn, conn.cursor() as cs:
-                cs.execute("""
-                    INSERT INTO aqi (ts, bus_stop_id, value)
-                    VALUES (
-                        %s, %s, %s
-                    )
-                """, [datetime.now(th_timezone), result.id, data['data']['aqi']])
-                conn.commit()
+            aqicn = AqiCn()
+            aqicn.create(result.busstop_id, data['data']['aqi'])
             print(f"[AQICN] {result.name} weather data inserted...")
 
 def iqair():
@@ -72,21 +61,14 @@ def iqair():
             data = response.json()
             print(data)
             print(f"[IQAir] Inserting weather data for {result.name}...")
-            with pool.connection() as conn, conn.cursor() as cs:
-                cs.execute("""
-                    INSERT INTO iqair (ts, bus_stop_id, temperature, humidity, wind_speed, pm25_value)
-                    VALUES (
-                        %s, %s, %s, %s, %s, %s
-                    )
-                """, [
-                    datetime.now(th_timezone),
-                    result.id,
-                    data['data']['current']['weather']['tp'],
-                    data['data']['current']['weather']['hu'],
-                    data['data']['current']['weather']['ws'],
-                    data['data']['current']['pollution']['aqius']
-                ])
-                conn.commit()
+            iqair = IqAir()
+            iqair.create(
+                result.busstop_id,
+                data['data']['current']['weather']['tp'],
+                data['data']['current']['weather']['hu'],
+                data['data']['current']['weather']['ws'],
+                data['data']['current']['pollution']['aqius']
+            )
             print(f"[IQAir] {result.name} weather data inserted...")
             sleep(20)
 
@@ -103,17 +85,8 @@ def generate_population():
                 continue
             print(f"[Population] Inserting {people} population for {result.name}...")
             for _ in range(people):
-                with pool.connection() as conn, conn.cursor() as cs:
-                    cs.execute("""
-                        INSERT INTO population (ts, bus_stop_id)
-                        VALUES (
-                            %s, %s
-                        )
-                    """, [
-                        datetime.now(th_timezone),
-                        result.id
-                    ])
-                    conn.commit()
+                ppl = Population()
+                ppl.create(result.busstop_id)
             print(f"[Population] {result.name} population inserted...")
 
 

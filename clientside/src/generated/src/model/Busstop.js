@@ -48,7 +48,7 @@ class Busstop {
             obj = obj || new Busstop();
 
             if (data.hasOwnProperty('id')) {
-                obj['id'] = ApiClient.convertToType(data['id'], 'Number');
+                obj['id'] = ApiClient.convertToType(data['id'], 'String');
             }
             if (data.hasOwnProperty('busstopId')) {
                 obj['busstopId'] = ApiClient.convertToType(data['busstopId'], 'String');
@@ -73,6 +73,10 @@ class Busstop {
      */
     static validateJSON(data) {
         // ensure the json data is a string
+        if (data['id'] && !(typeof data['id'] === 'string' || data['id'] instanceof String)) {
+            throw new Error("Expected the field `id` to be a primitive type in the JSON string but got " + data['id']);
+        }
+        // ensure the json data is a string
         if (data['busstopId'] && !(typeof data['busstopId'] === 'string' || data['busstopId'] instanceof String)) {
             throw new Error("Expected the field `busstopId` to be a primitive type in the JSON string but got " + data['busstopId']);
         }
@@ -90,7 +94,7 @@ class Busstop {
 
 
 /**
- * @member {Number} id
+ * @member {String} id
  */
 Busstop.prototype['id'] = undefined;
 

@@ -30,7 +30,7 @@ paths:
         in: path
         required: true
         schema:
-          type: integer
+          type: string
     get:
       summary: Returns complete details of the specified Talai bus stop
       operationId: controller.get_busstop
@@ -60,7 +60,7 @@ paths:
         in: path
         required: true
         schema:
-          type: integer
+          type: string
     get:
       summary: Returns weather detail of the specified Talai bus stop
       operationId: controller.get_busstop_weather
@@ -79,7 +79,7 @@ paths:
         in: path
         required: true
         schema:
-          type: integer
+          type: string
     get:
       summary: Returns PM2.5 detail of the specified Talai bus stop
       operationId: controller.get_busstop_aqi
@@ -98,7 +98,7 @@ paths:
         in: path
         required: true
         schema:
-          type: integer
+          type: string
     get:
       summary: Returns humidity detail of the specified Talai bus stop
       operationId: controller.get_busstop_humidity
@@ -130,12 +130,12 @@ paths:
         in: path
         required: true
         schema:
-          type: integer
+          type: string
       - name: stopIdDest
         in: path
         required: true
         schema:
-          type: integer
+          type: string
     get:
       summary: Returns list of takable bus from origin to destination
       operationId: controller.get_takable_bus
@@ -171,7 +171,7 @@ paths:
         in: path
         required: true
         schema:
-          type: integer
+          type: string
     put:
       summary: Increment people in KU Talai bus stop
       operationId: controller.put_population
@@ -206,7 +206,7 @@ components:
       type: object
       properties:
         id:
-          type: integer
+          type: string
         busstopId:
           type: string
         name:

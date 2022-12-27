@@ -31,7 +31,7 @@ def controller_get_busstop(stop_id):  # noqa: E501
      # noqa: E501
 
     :param stop_id: 
-    :type stop_id: int
+    :type stop_id: str
 
     :rtype: Union[Busstop, Tuple[Busstop, int], Tuple[Busstop, int, Dict[str, str]]
     """
@@ -44,7 +44,7 @@ def controller_get_busstop_aqi(stop_id):  # noqa: E501
      # noqa: E501
 
     :param stop_id: 
-    :type stop_id: int
+    :type stop_id: str
 
     :rtype: Union[List[BusstopWeather], Tuple[List[BusstopWeather], int], Tuple[List[BusstopWeather], int, Dict[str, str]]
     """
@@ -57,7 +57,7 @@ def controller_get_busstop_humidity(stop_id):  # noqa: E501
      # noqa: E501
 
     :param stop_id: 
-    :type stop_id: int
+    :type stop_id: str
 
     :rtype: Union[List[BusstopWeather], Tuple[List[BusstopWeather], int], Tuple[List[BusstopWeather], int, Dict[str, str]]
     """
@@ -70,7 +70,7 @@ def controller_get_busstop_weather(stop_id):  # noqa: E501
      # noqa: E501
 
     :param stop_id: 
-    :type stop_id: int
+    :type stop_id: str
 
     :rtype: Union[List[BusstopWeather], Tuple[List[BusstopWeather], int], Tuple[List[BusstopWeather], int, Dict[str, str]]
     """
@@ -94,7 +94,7 @@ def controller_get_population(stop_id):  # noqa: E501
      # noqa: E501
 
     :param stop_id: 
-    :type stop_id: int
+    :type stop_id: str
 
     :rtype: Union[List[PopulationDensity], Tuple[List[PopulationDensity], int], Tuple[List[PopulationDensity], int, Dict[str, str]]
     """
@@ -118,9 +118,9 @@ def controller_get_takable_bus(stop_id_origin, stop_id_dest):  # noqa: E501
      # noqa: E501
 
     :param stop_id_origin: 
-    :type stop_id_origin: int
+    :type stop_id_origin: str
     :param stop_id_dest: 
-    :type stop_id_dest: int
+    :type stop_id_dest: str
 
     :rtype: Union[List[Route], Tuple[List[Route], int], Tuple[List[Route], int, Dict[str, str]]
     """
@@ -133,7 +133,7 @@ def controller_put_population(stop_id):  # noqa: E501
      # noqa: E501
 
     :param stop_id: 
-    :type stop_id: int
+    :type stop_id: str
 
     :rtype: Union[str, Tuple[str, int], Tuple[str, int, Dict[str, str]]
     """

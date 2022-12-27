@@ -15,14 +15,14 @@ paths:
         name: stopIdOrigin
         required: true
         schema:
-          type: integer
+          type: string
         style: simple
       - explode: false
         in: path
         name: stopIdDest
         required: true
         schema:
-          type: integer
+          type: string
         style: simple
       responses:
         "200":
@@ -44,7 +44,7 @@ paths:
         name: stopId
         required: true
         schema:
-          type: integer
+          type: string
         style: simple
       responses:
         "200":
@@ -77,7 +77,7 @@ paths:
         name: stopId
         required: true
         schema:
-          type: integer
+          type: string
         style: simple
       responses:
         "200":
@@ -99,7 +99,7 @@ paths:
         name: stopId
         required: true
         schema:
-          type: integer
+          type: string
         style: simple
       responses:
         "200":
@@ -121,7 +121,7 @@ paths:
         name: stopId
         required: true
         schema:
-          type: integer
+          type: string
         style: simple
       responses:
         "200":
@@ -162,7 +162,7 @@ paths:
         name: stopId
         required: true
         schema:
-          type: integer
+          type: string
         style: simple
       responses:
         "200":
@@ -188,7 +188,7 @@ paths:
         name: stopId
         required: true
         schema:
-          type: integer
+          type: string
         style: simple
       responses:
         "200":
@@ -239,13 +239,13 @@ components:
       example:
         busstopId: busstopId
         name: name
-        lon: 1.4658129805029452
-        id: 0
-        lat: 6.027456183070403
+        lon: 6.027456183070403
+        id: id
+        lat: 0.8008281904610115
       properties:
         id:
           title: id
-          type: integer
+          type: string
         busstopId:
           title: busstopId
           type: string

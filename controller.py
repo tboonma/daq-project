@@ -5,6 +5,7 @@ from config import OPENAPI_STUB_DIR, DB_HOST, DB_USER, DB_PASSWD, DB_NAME
 import logging
 from datetime import datetime, timezone, timedelta
 from ariadne import QueryType
+from models import *
 
 query = QueryType()
 th_timezone = timezone(timedelta(hours=7))
@@ -23,26 +24,21 @@ pool = PooledDB(creator=pymysql,
 
 def get_busstops():
     logging.info("Connecting to database...")
-    with pool.connection() as conn, conn.cursor() as cs:
-        logging.info("Executing query...")
-        cs.execute("""
-            SELECT id, bus_stop_id, bus_stop_name, lat, lon
-            FROM bus_stop
-        """)
-        logging.info("Returning result...")
-        result = [models.Busstop(*row) for row in cs.fetchall()]
-        return result
+    bus_stop = BusStop()
+    result = [models.Busstop(stop['id'], stop['bus_stop_id'], stop['bus_stop_name'], stop['lat'], stop['lon']) for stop in bus_stop.get()]
+    return result
 
 def get_busstop(stop_id):
-    with pool.connection() as conn, conn.cursor() as cs:
-        cs.execute("""
-            SELECT id, bus_stop_id, bus_stop_name, lat, lon
-            FROM bus_stop
-            WHERE id=%s
-        """, [stop_id])
-        result = cs.fetchone()
-        if result:
-            return models.Busstop(*result)
+    bus_stop = BusStop()
+    query_result = bus_stop.get_by_id(stop_id)
+    result = models.Busstop(
+        query_result['id'],
+        query_result['bus_stop_id'],
+        query_result['name'],
+        query_result['lat'],
+        query_result['lon']
+    )
+    return result
 
 def get_busstop_weather(stop_id):
     logging.info("Connecting to database...")

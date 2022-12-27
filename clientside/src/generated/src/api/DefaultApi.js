@@ -90,7 +90,7 @@ export default class DefaultApi {
 
     /**
      * Returns complete details of the specified Talai bus stop
-     * @param {Number} stopId 
+     * @param {String} stopId 
      * @param {module:api/DefaultApi~controllerGetBusstopCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/Busstop}
      */
@@ -132,7 +132,7 @@ export default class DefaultApi {
 
     /**
      * Returns PM2.5 detail of the specified Talai bus stop
-     * @param {Number} stopId 
+     * @param {String} stopId 
      * @param {module:api/DefaultApi~controllerGetBusstopAqiCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/BusstopWeather>}
      */
@@ -174,7 +174,7 @@ export default class DefaultApi {
 
     /**
      * Returns humidity detail of the specified Talai bus stop
-     * @param {Number} stopId 
+     * @param {String} stopId 
      * @param {module:api/DefaultApi~controllerGetBusstopHumidityCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/BusstopWeather>}
      */
@@ -216,7 +216,7 @@ export default class DefaultApi {
 
     /**
      * Returns weather detail of the specified Talai bus stop
-     * @param {Number} stopId 
+     * @param {String} stopId 
      * @param {module:api/DefaultApi~controllerGetBusstopWeatherCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/BusstopWeather>}
      */
@@ -294,7 +294,7 @@ export default class DefaultApi {
 
     /**
      * Get population density in each KU Talai bus
-     * @param {Number} stopId 
+     * @param {String} stopId 
      * @param {module:api/DefaultApi~controllerGetPopulationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/PopulationDensity>}
      */
@@ -372,8 +372,8 @@ export default class DefaultApi {
 
     /**
      * Returns list of takable bus from origin to destination
-     * @param {Number} stopIdOrigin 
-     * @param {Number} stopIdDest 
+     * @param {String} stopIdOrigin 
+     * @param {String} stopIdDest 
      * @param {module:api/DefaultApi~controllerGetTakableBusCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/Route>}
      */
@@ -420,7 +420,7 @@ export default class DefaultApi {
 
     /**
      * Increment people in KU Talai bus stop
-     * @param {Number} stopId 
+     * @param {String} stopId 
      * @param {module:api/DefaultApi~controllerPutPopulationCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link String}
      */

@@ -27,6 +27,7 @@ function App() {
 
   let api = undefined
   if (window.location.href.includes('localhost')) {
+    const apiClient = new ApiClient('http://localhost:8080/talai-api/v1')
     api = new DefaultApi()
   } else {
     const apiClient = new ApiClient('/talai-api/v1')
@@ -137,12 +138,11 @@ function App() {
         if (res.ok) {
           let availableBus = ''
           res.body.forEach((bus) => (availableBus += bus.routeNumber + ', '))
-          if (availableBus === '') availableBus = 'Cannot take only 1 bus to go there'
+          if (availableBus === '')
+            availableBus = 'Cannot take only 1 bus to go there'
           setTakableBus(availableBus.slice(0, -2))
         }
       })
-
-    
   }
 
   useEffect(() => {

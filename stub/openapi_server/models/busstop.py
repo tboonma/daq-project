@@ -19,7 +19,7 @@ class Busstop(Model):
         """Busstop - a model defined in OpenAPI
 
         :param id: The id of this Busstop.  # noqa: E501
-        :type id: int
+        :type id: str
         :param busstop_id: The busstop_id of this Busstop.  # noqa: E501
         :type busstop_id: str
         :param name: The name of this Busstop.  # noqa: E501
@@ -30,7 +30,7 @@ class Busstop(Model):
         :type lon: float
         """
         self.openapi_types = {
-            'id': int,
+            'id': str,
             'busstop_id': str,
             'name': str,
             'lat': float,
@@ -68,7 +68,7 @@ class Busstop(Model):
 
 
         :return: The id of this Busstop.
-        :rtype: int
+        :rtype: str
         """
         return self._id
 
@@ -78,7 +78,7 @@ class Busstop(Model):
 
 
         :param id: The id of this Busstop.
-        :type id: int
+        :type id: str
         """
 
         self._id = id
